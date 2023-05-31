@@ -17,7 +17,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import GiftedCharts from './components/GiftedCharts';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import VerticalBar from './components/VerticalBar';
+import HorizontalBar from './components/HorizontalBar';
 
 const App = () => {
   return (
@@ -30,7 +30,7 @@ const App = () => {
       <ScrollView>
         <View style={{flexDirection: 'column'}}>
           <GiftedCharts />
-          <VerticalBar />
+          <HorizontalBar />
         </View>
       </ScrollView>
     </SafeAreaView>

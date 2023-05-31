@@ -63,6 +63,7 @@ const GiftedCharts = () => {
           yAxisThickness={0}
           xAxisThickness={0}
           onPress={(item, index) => console.log('item', item)}
+          isAnimated={true}
         />
       </ScrollView>
     </View>
