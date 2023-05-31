@@ -21,7 +21,8 @@
     "react-native-screens": "^3.20.0",
     "react-native-svg": "^13.9.0",
     "react-native-vector-icons": "^9.2.0",
-    "victory": "^36.6.10"
+    "victory": "^36.6.10",
+    "victory-native": "^36.6.10"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
