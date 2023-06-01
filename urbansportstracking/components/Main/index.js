@@ -21,10 +21,13 @@ function StackScreens() {
     <Tab.Navigator
       initialRouteName="Feed"
       screenOptions={({route}) => ({
-        tabBarInactiveTintColor: '#000000',
-        tabBarActiveTintColor: '#FF0000',
+        tabBarInactiveTintColor: '#191D18',
+        tabBarActiveTintColor: '#93C123',
         tabBarStyle: '#000000',
         headerTitleAlign: 'center',
+        tabBarStyle: {backgroundColor: '#404040'},
+        headerStyle: {backgroundColor: '#404040'},
+        headerTitleStyle: {color: '#93C123'},
       })}>
       <Tab.Screen
         name="Home"

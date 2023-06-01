@@ -10,7 +10,8 @@ import SvgImage from '../images/skateboardpana.svg';
 
 const HomeScreen = () => {
   return (
-    <SafeAreaView style={{flex: 1, alignItems: 'center'}}>
+    <SafeAreaView
+      style={{flex: 1, alignItems: 'center', backgroundColor: '#191D18'}}>
       <View
         style={{
           width: '100%',
@@ -33,13 +34,13 @@ const HomeScreen = () => {
               marginLeft: 40,
               marginBottom: 40,
             }}>
-            <Text style={{fontWeight: 'bold', fontSize: 16, color: '#000000'}}>
+            <Text style={{fontWeight: 'bold', fontSize: 16, color: '#F2F2F2'}}>
               Recent Statistics
             </Text>
           </View>
           <View
             style={{
-              backgroundColor: '#A6A6A6',
+              backgroundColor: '#404040',
               width: '80%',
               height: '15%',
               marginBottom: 25,
@@ -48,16 +49,28 @@ const HomeScreen = () => {
               justifyContent: 'space-between',
               alignItems: 'center',
             }}>
-            <Text style={{marginLeft: 20, fontWeight: 'bold', fontSize: 16}}>
+            <Text
+              style={{
+                marginLeft: 20,
+                fontWeight: 'bold',
+                fontSize: 16,
+                color: '#F2F2F2',
+              }}>
               Average Impact
             </Text>
-            <Text style={{marginRight: 20, fontWeight: 'bold', fontSize: 16}}>
+            <Text
+              style={{
+                marginRight: 20,
+                fontWeight: 'bold',
+                fontSize: 16,
+                color: '#93C123',
+              }}>
               Measurements
             </Text>
           </View>
           <View
             style={{
-              backgroundColor: '#A6A6A6',
+              backgroundColor: '#404040',
               width: '80%',
               height: '15%',
               marginBottom: 25,
@@ -66,16 +79,28 @@ const HomeScreen = () => {
               justifyContent: 'space-between',
               alignItems: 'center',
             }}>
-            <Text style={{marginLeft: 20, fontWeight: 'bold', fontSize: 16}}>
+            <Text
+              style={{
+                marginLeft: 20,
+                fontWeight: 'bold',
+                fontSize: 16,
+                color: '#F2F2F2',
+              }}>
               Recent Impact
             </Text>
-            <Text style={{marginRight: 20, fontWeight: 'bold', fontSize: 16}}>
+            <Text
+              style={{
+                marginRight: 20,
+                fontWeight: 'bold',
+                fontSize: 16,
+                color: '#93C123',
+              }}>
               Measurements
             </Text>
           </View>
           <View
             style={{
-              backgroundColor: '#A6A6A6',
+              backgroundColor: '#404040',
               width: '80%',
               height: '15%',
               marginBottom: 25,
@@ -84,10 +109,22 @@ const HomeScreen = () => {
               justifyContent: 'space-between',
               alignItems: 'center',
             }}>
-            <Text style={{marginLeft: 20, fontWeight: 'bold', fontSize: 16}}>
+            <Text
+              style={{
+                marginLeft: 20,
+                fontWeight: 'bold',
+                fontSize: 16,
+                color: '#F2F2F2',
+              }}>
               Recent CMJ
             </Text>
-            <Text style={{marginRight: 20, fontWeight: 'bold', fontSize: 16}}>
+            <Text
+              style={{
+                marginRight: 20,
+                fontWeight: 'bold',
+                fontSize: 16,
+                color: '#93C123',
+              }}>
               Measurements
             </Text>
           </View>
