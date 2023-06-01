@@ -1,33 +1,49 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import {BarChart} from 'react-native-gifted-charts';
+import {VictoryBar, VictoryChart, VictoryTheme} from 'victory-native';
 
 const HorizontalBar = () => {
-  const barData = [
-    {value: 250, label: 'M'},
-    {value: 500, label: 'T', frontColor: '#177AD5'},
-    {value: 745, label: 'W', frontColor: '#177AD5'},
-    {value: 320, label: 'T'},
-    {value: 600, label: 'F', frontColor: '#177AD5'},
-    {value: 256, label: 'S'},
-    {value: 300, label: 'S'},
+  const data = [
+    {quarter: 'Gemiddelde', earnings: 13000},
+    {quarter: 'Maximaal', earnings: 16500},
   ];
   return (
-    <View style={{marginTop: 200}}>
-      <BarChart
-        horizontal
-        barWidth={22}
-        noOfSections={3}
-        barBorderRadius={4}
-        frontColor="lightgray"
-        data={barData}
-        yAxisAtTop={true}
-        intactTopLabel={true}
-        yAxisThickness={0}
-        xAxisThickness={0}
-      />
+    <View style={styles.container}>
+      <VictoryChart
+        horizontal={true}
+        width={350}
+        theme={VictoryTheme.material}
+        domain={{y: [0, 20000]}}
+        height={250}
+        domainPadding={{x: [80, 80]}}
+        padding={{left: 90, bottom: 50, right: 30}}
+        colorScale={['blue', 'blue']}>
+        <VictoryBar
+          categories={{
+            x: ['Maximaal', 'Gemiddelde'],
+          }}
+          data={[
+            {x: 'Gemiddelde', y: 15000},
+            {x: 'Maximaal', y: 20000},
+          ]}
+          barWidth={60}
+          barRatio={5}
+          cornerRadius={{topLeft: 10, topRight: 10}}
+          style={{data: {fill: 'green'}}}
+        />
+      </VictoryChart>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#000000',
+    color: '#FFFFFF',
+    paddingTop: 50,
+  },
+});
 
 export default HorizontalBar;
