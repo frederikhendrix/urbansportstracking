@@ -18,22 +18,27 @@ import {
 import GiftedCharts from './components/GiftedCharts';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import HorizontalBar from './components/HorizontalBar';
+import {
+  NavigationContainer,
+  useNavigationContainerRef,
+} from '@react-navigation/native';
+
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import StackScreens from './components/Main';
+
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
+  const navigationRef = useNavigationContainerRef();
+
   return (
-    <SafeAreaView
-      style={{
-        backgroundColor: '#FFFFFF',
-        flex: 1,
-        alignItems: 'center',
-      }}>
-      <ScrollView>
-        <View style={{flexDirection: 'column'}}>
-          <GiftedCharts />
-          <HorizontalBar />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <NavigationContainer ref={navigationRef}>
+        <SafeAreaProvider>
+          <StackScreens />
+        </SafeAreaProvider>
+      </NavigationContainer>
+    </GestureHandlerRootView>
   );
 };
 
