@@ -33,7 +33,7 @@ const HomeScreen = () => {
               marginLeft: 40,
               marginBottom: 40,
             }}>
-            <Text style={{fontWeight: 'bold', fontSize: 16}}>
+            <Text style={{fontWeight: 'bold', fontSize: 16, color: '#000000'}}>
               Recent Statistics
             </Text>
           </View>
@@ -67,7 +67,7 @@ const HomeScreen = () => {
               alignItems: 'center',
             }}>
             <Text style={{marginLeft: 20, fontWeight: 'bold', fontSize: 16}}>
-              Average Impact
+              Recent Impact
             </Text>
             <Text style={{marginRight: 20, fontWeight: 'bold', fontSize: 16}}>
               Measurements
@@ -85,7 +85,7 @@ const HomeScreen = () => {
               alignItems: 'center',
             }}>
             <Text style={{marginLeft: 20, fontWeight: 'bold', fontSize: 16}}>
-              Average Impact
+              Recent CMJ
             </Text>
             <Text style={{marginRight: 20, fontWeight: 'bold', fontSize: 16}}>
               Measurements
