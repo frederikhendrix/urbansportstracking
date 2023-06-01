@@ -1,11 +1,14 @@
 import {View, Text, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import IconFeather from 'react-native-vector-icons/Feather';
-
+import Slider from '@react-native-community/slider';
 const UploadScreen = () => {
+  const [painEndured, setPainEndured] = useState('1');
+  const [effectiveness, setEffectiveness] = useState('1');
   return (
-    <SafeAreaView style={{flex: 1, alignItems: 'center'}}>
+    <SafeAreaView
+      style={{flex: 1, alignItems: 'center', backgroundColor: '#191D18'}}>
       <View
         style={{
           width: '100%',
@@ -15,14 +18,14 @@ const UploadScreen = () => {
           marginTop: 40,
         }}>
         <TouchableOpacity>
-          <IconFeather name="folder-plus" size={144} color="#000000" />
+          <IconFeather name="folder-plus" size={144} color="#93C123" />
         </TouchableOpacity>
         <Text
           style={{
             marginTop: 20,
             fontWeight: 'bold',
             fontSize: 16,
-            color: 'black',
+            color: '#93C123',
           }}>
           File Name
         </Text>
@@ -30,7 +33,7 @@ const UploadScreen = () => {
       <View
         style={{
           width: '100%',
-          height: '30%',
+          height: '35%',
           alignItems: 'center',
         }}>
         <View
@@ -44,29 +47,61 @@ const UploadScreen = () => {
             style={{
               fontWeight: 'bold',
               fontSize: 16,
-              color: '#000000',
+              color: '#F2F2F2',
               marginBottom: 20,
             }}>
             Remarks
           </Text>
           <Text
             style={{
-              fontWeight: 'bold',
               fontSize: 16,
-              color: '#000000',
-              marginBottom: 20,
+              color: '#F2F2F2',
+              marginBottom: 10,
             }}>
             Pain Endured
           </Text>
           <Text
             style={{
-              fontWeight: 'bold',
               fontSize: 16,
-              color: '#000000',
-              marginBottom: 20,
+              color: '#F2F2F2',
+              marginBottom: 5,
+            }}>
+            {painEndured}
+          </Text>
+          <Slider
+            minimumValue={1}
+            maximumValue={10}
+            thumbTintColor="#8E23C1"
+            minimumTrackTintColor="#93C123"
+            maximumTrackTintColor="#93C123"
+            value={1}
+            onValueChange={value => setPainEndured(parseInt(value))}
+            style={{width: 300, marginBottom: 10}}></Slider>
+          <Text
+            style={{
+              fontSize: 16,
+              color: '#F2F2F2',
+              marginBottom: 10,
             }}>
             Effectiveness
           </Text>
+          <Text
+            style={{
+              fontSize: 16,
+              color: '#F2F2F2',
+              marginBottom: 5,
+            }}>
+            {effectiveness}
+          </Text>
+          <Slider
+            minimumValue={1}
+            maximumValue={10}
+            thumbTintColor="#8E23C1"
+            minimumTrackTintColor="#93C123"
+            maximumTrackTintColor="#93C123"
+            value={1}
+            onValueChange={value => setEffectiveness(parseInt(value))}
+            style={{width: 300, marginBottom: 10}}></Slider>
         </View>
       </View>
       <View
@@ -82,9 +117,17 @@ const UploadScreen = () => {
             marginTop: 30,
             marginBottom: 20,
           }}>
-          <Text style={{fontWeight: 'bold', fontSize: 16, color: '#000000'}}>
-            Upload
-          </Text>
+          <TouchableOpacity
+            onPress={() => {}}
+            style={{
+              padding: 10,
+              borderRadius: 10,
+              backgroundColor: '#404040',
+            }}>
+            <Text style={{fontWeight: 'bold', fontSize: 16, color: '#F2F2F2'}}>
+              Upload
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
