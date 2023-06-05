@@ -1,11 +1,80 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Alert,
+  ToastAndroid,
+  Platform,
+  AlertIOS,
+} from 'react-native';
 import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import IconFeather from 'react-native-vector-icons/Feather';
 import Slider from '@react-native-community/slider';
+import DocumentPicker from 'react-native-document-picker';
+
 const UploadScreen = () => {
   const [painEndured, setPainEndured] = useState('1');
   const [effectiveness, setEffectiveness] = useState('1');
+  const [fileName, setFileName] = useState('File Name');
+
+  const pickCSVFile = async () => {
+    try {
+      const res = await DocumentPicker.pick({
+        type: [DocumentPicker.types.allFiles],
+      });
+
+      if (res.type === 'application/vnd.ms-excel' || res.type === 'text/csv') {
+        // Handle the selected CSV file here
+        console.log(res.uri);
+        setFileName(res[0].name);
+      } else {
+        // Invalid file type selected
+        console.log('Invalid file type. Please select a CSV file.');
+        console.log(res);
+        setFileName(res[0].name);
+      }
+    } catch (err) {
+      if (DocumentPicker.isCancel(err)) {
+        // User cancelled the document picking
+        console.log('Document picking cancelled.');
+      } else {
+        // Error occurred while picking the document
+        console.log('Error occurred:', err);
+      }
+    }
+  };
+
+  const notifyMessage = () => {
+    if (Platform.OS === 'android') {
+      ToastAndroid.show('File Uploaded', ToastAndroid.SHORT);
+    } else {
+      AlertIOS.alert('File Uploaded');
+    }
+  };
+
+  const uploadCSVFile = () => {
+    //here some axios post request to API
+    console.log('csv file uploaded');
+    notifyMessage();
+  };
+
+  const uploadCSVFileAlerts = () => {
+    console.log('function run');
+    if (fileName !== 'File Name') {
+      Alert.alert('Important', 'Are you sure you want to upload this file?', [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {text: 'OK', onPress: () => uploadCSVFile()},
+      ]);
+    } else {
+      Alert.alert('No file selected');
+    }
+  };
+
   return (
     <SafeAreaView
       style={{flex: 1, alignItems: 'center', backgroundColor: '#191D18'}}>
@@ -17,7 +86,7 @@ const UploadScreen = () => {
           justifyContent: 'center',
           marginTop: 40,
         }}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={pickCSVFile}>
           <IconFeather name="folder-plus" size={144} color="#93C123" />
         </TouchableOpacity>
         <Text
@@ -27,7 +96,7 @@ const UploadScreen = () => {
             fontSize: 16,
             color: '#93C123',
           }}>
-          File Name
+          {fileName}
         </Text>
       </View>
       <View
@@ -118,7 +187,7 @@ const UploadScreen = () => {
             marginBottom: 20,
           }}>
           <TouchableOpacity
-            onPress={() => {}}
+            onPress={uploadCSVFileAlerts}
             style={{
               padding: 10,
               borderRadius: 10,

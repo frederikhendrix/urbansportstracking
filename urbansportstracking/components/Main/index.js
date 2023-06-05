@@ -11,18 +11,53 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import IconAwesome from 'react-native-vector-icons/FontAwesome';
+import IconAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import IconFeather from 'react-native-vector-icons/Feather';
+import IconAntDesign from 'react-native-vector-icons/AntDesign';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
+function DataStack() {
+  return (
+    <Stack.Navigator
+      initialRouteName="DataStack"
+      screenOptions={{headerShown: false, headerTitleAlign: 'center'}}>
+      <Stack.Screen
+        name="Data"
+        component={DataScreen}
+        options={{
+          title: 'Data',
+          headerShown: true,
+          headerTintColor: '#93C123',
+          headerStyle: {
+            backgroundColor: '#404040',
+          },
+        }}
+      />
+      <Stack.Screen
+        name="DataVisualScreen"
+        component={DataVisualScreen}
+        options={{
+          title: 'Data Visual',
+          headerShown: true,
+          headerTintColor: '#93C123',
+          headerStyle: {
+            backgroundColor: '#404040',
+          },
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
 
 function StackScreens() {
   return (
     <Tab.Navigator
       initialRouteName="Feed"
       screenOptions={({route}) => ({
-        tabBarInactiveTintColor: '#191D18',
-        tabBarActiveTintColor: '#93C123',
+        tabBarInactiveTintColor: '#93C123',
+        tabBarActiveTintColor: '#191D18',
         tabBarStyle: '#000000',
         headerTitleAlign: 'center',
         tabBarStyle: {backgroundColor: '#404040'},
@@ -53,11 +88,13 @@ function StackScreens() {
       />
       <Tab.Screen
         name="Data"
-        component={DataScreen}
+        component={DataStack}
         options={{
+          headerShown: false,
+          headerTitleAlign: 'center',
           tabBarLabel: 'Data',
           tabBarIcon: ({color, size}) => (
-            <IconFeather name="folder-plus" size={size} color={color} />
+            <IconAntDesign name="linechart" size={size} color={color} />
           ),
           unmountOnBlur: true,
         }}
@@ -68,7 +105,7 @@ function StackScreens() {
         options={{
           tabBarLabel: 'CMJ',
           tabBarIcon: ({color, size}) => (
-            <IconFeather name="folder-plus" size={size} color={color} />
+            <IconAwesome5 name="running" size={size} color={color} />
           ),
           unmountOnBlur: true,
         }}
@@ -79,7 +116,7 @@ function StackScreens() {
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({color, size}) => (
-            <IconFeather name="folder-plus" size={size} color={color} />
+            <IconAntDesign name="user" size={size} color={color} />
           ),
           unmountOnBlur: true,
         }}
