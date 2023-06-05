@@ -1,82 +1,120 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  KeyboardAvoidingView,
+} from 'react-native';
 import React from 'react';
 import {TextInput} from 'react-native-gesture-handler';
-
+import blacksplashImage from '../images/blacksplash.png';
 const ProfileScreen = () => {
   return (
     <View style={{flex: 1, backgroundColor: '#191D18'}}>
-      <Text>ProfileScreen</Text>
-      <View
-        style={{
-          flexDirection: 'row',
-          borderBottomColor: '#93C123',
-          borderBottomWidth: 1,
-          marginBottom: 10,
-          backgroundColor: '#404040',
-          marginTop: 10,
-        }}>
+      <KeyboardAvoidingView
+        style={{flex: 1, justifyContent: 'center'}}
+        behavior="padding"
+        keyboardVerticalOffset={Platform.select({ios: 0, android: 25})}>
+        <Image
+          style={{height: 320}}
+          source={require('../images/Login_Image.png')}
+        />
         <Text
           style={{
-            fontSize: 20,
-            marginRight: 5,
-            marginBottom: 0,
-            marginLeft: 5,
             color: '#93C123',
-          }}>
-          Icon
-        </Text>
-        <TextInput
-          style={{paddingVertical: 2, flex: 1}}
-          keyboardType="email-address"
-          placeholder="Email"
-          placeholderTextColor="#F2F2F2"></TextInput>
-      </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          borderBottomColor: '#93C123',
-          borderBottomWidth: 1,
-          marginBottom: 25,
-          backgroundColor: '#404040',
-          marginTop: 10,
-        }}>
-        <Text
-          style={{
-            fontSize: 20,
-            marginRight: 5,
-            marginBottom: 0,
-            marginLeft: 5,
-            color: '#93C123',
-          }}>
-          Icon
-        </Text>
-        <TextInput
-          style={{paddingVertical: 2, flex: 1, color: '#F2F2F2'}}
-          placeholder="Password"
-          placeholderTextColor="#F2F2F2"
-          secureTextEntry={true}></TextInput>
-      </View>
-      <TouchableOpacity
-        onPress={() => {}}
-        style={{
-          backgroundColor: '#93C123',
-          padding: 20,
-          borderRadius: 10,
-          marginBottom: 30,
-          margin: 50,
-        }}>
-        <Text
-          style={{
-            color: '#191D18',
-            fontWeight: '700',
             fontSize: 16,
-            textAlign: 'center',
+            fontWeight: 'bold',
+            marginLeft: 40,
+            marginBottom: 10,
           }}>
-          Log in
+          Email
         </Text>
-      </TouchableOpacity>
+        <View style={styles.container}>
+          <TextInput
+            style={styles.textInput}
+            keyboardType="email-address"
+            placeholder="Email"
+            placeholderTextColor="#A8A8A8"></TextInput>
+        </View>
+        <Text
+          style={{
+            color: '#93C123',
+            fontSize: 16,
+            fontWeight: 700,
+            marginLeft: 40,
+            marginTop: 30,
+            marginBottom: 10,
+          }}>
+          Password
+        </Text>
+        <View style={styles.container}>
+          <TextInput
+            style={styles.textInput}
+            placeholder="Password"
+            placeholderTextColor="#A8A8A8"
+            secureTextEntry={true}></TextInput>
+        </View>
+
+        <TouchableOpacity
+          onPress={() => {}}
+          style={{
+            width: '50%',
+            alignSelf: 'center',
+            backgroundColor: '#93C123',
+            padding: 10,
+            borderRadius: 10,
+            marginBottom: 0,
+            margin: 20,
+          }}>
+          <Text
+            style={{
+              color: '#F2F2F2',
+              fontSize: 16,
+              textAlign: 'center',
+            }}>
+            Log in
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {}}
+          style={{
+            width: '50%',
+            alignSelf: 'center',
+            backgroundColor: '#191D18',
+            borderColor: '#93C123',
+            padding: 10,
+            borderWidth: 2,
+            borderRadius: 10,
+            marginBottom: 20,
+            margin: 20,
+          }}>
+          <Text
+            style={{
+              color: '#F2F2F2',
+              fontSize: 16,
+              textAlign: 'center',
+            }}>
+            Sign up
+          </Text>
+        </TouchableOpacity>
+      </KeyboardAvoidingView>
     </View>
   );
 };
-
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  textInput: {
+    width: '80%',
+    height: 40,
+    borderWidth: 1,
+    borderColor: '#999999',
+    borderRadius: 5,
+    paddingLeft: 10,
+    color: '#F2F2F2', // Text color when typing
+  },
+});
 export default ProfileScreen;
