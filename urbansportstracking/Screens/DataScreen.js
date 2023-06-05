@@ -10,16 +10,16 @@ const DataScreen = ({navigation}) => {
     'trainingsession3',
     'trainingsession4',
     'trainingsession5',
-    'trainingsession1',
-    'trainingsession2',
-    'trainingsession3',
-    'trainingsession4',
-    'trainingsession5',
-    'trainingsession1',
-    'trainingsession2',
-    'trainingsession3',
-    'trainingsession4',
-    'trainingsession5',
+    'trainingsession6',
+    'trainingsession7',
+    'trainingsession8',
+    'trainingsession9',
+    'trainingsession10',
+    'trainingsession11',
+    'trainingsession22',
+    'trainingsession33',
+    'trainingsession44',
+    'trainingsession55',
   ];
 
   return (
@@ -52,7 +52,7 @@ const DataScreen = ({navigation}) => {
             <View
               key={index}
               style={{
-                margin: 20,
+                margin: 10,
                 flexDirection: 'column',
                 justifyContent: 'space-between',
               }}>
