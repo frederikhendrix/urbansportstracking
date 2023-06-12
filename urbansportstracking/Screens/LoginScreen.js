@@ -6,10 +6,55 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
 } from 'react-native';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {TextInput} from 'react-native-gesture-handler';
 import blacksplashImage from '../images/blacksplash.png';
-const LoginScreen = () => {
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const LoginScreen = ({navigation}) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(true);
+  const person = {
+    email: 'johndoe@gmail.com',
+    password: 'hello',
+    phoneNumber: '06311111',
+    weight: '90',
+  };
+
+  useEffect(() => {
+    const _storeData = async () => {
+      try {
+        await AsyncStorage.setItem('@MyApp:dataEmail', person.email);
+        await AsyncStorage.setItem('@MyApp:dataPassword', person.password);
+        await AsyncStorage.setItem(
+          '@MyApp:dataPhoneNumber',
+          person.phoneNumber,
+        );
+        await AsyncStorage.setItem('@MyApp:dataWeight', person.weight);
+      } catch (error) {
+        console.log(error + ' This is the error');
+      }
+    };
+    _storeData();
+  }, []);
+
+  const handleEmailChange = text => {
+    setEmail(text);
+  };
+
+  const handlePasswordChange = text => {
+    setPassword(text);
+  };
+
+  const loginButton = () => {
+    if (email === person.email && password === person.password) {
+      navigation.navigate('ProfileScreen');
+    }
+
+    console.log(email);
+  };
+
   return (
     <View style={{flex: 1, backgroundColor: '#191D18'}}>
       <Image
@@ -31,7 +76,10 @@ const LoginScreen = () => {
           style={styles.textInput}
           keyboardType="email-address"
           placeholder="Email"
-          placeholderTextColor="#A8A8A8"></TextInput>
+          placeholderTextColor="#A8A8A8"
+          value={email}
+          onChangeText={text => handleEmailChange(text)}
+        />
       </View>
       <Text
         style={{
@@ -49,11 +97,14 @@ const LoginScreen = () => {
           style={styles.textInput}
           placeholder="Password"
           placeholderTextColor="#A8A8A8"
-          secureTextEntry={true}></TextInput>
+          secureTextEntry={true}
+          value={password}
+          onChangeText={text => handlePasswordChange(text)}
+        />
       </View>
 
       <TouchableOpacity
-        onPress={() => {}}
+        onPress={loginButton}
         style={{
           width: '50%',
           alignSelf: 'center',

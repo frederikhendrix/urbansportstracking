@@ -9,7 +9,8 @@ import {
 import React from 'react';
 import {TextInput} from 'react-native-gesture-handler';
 import blacksplashImage from '../images/blacksplash.png';
-const ProfileScreen = () => {
+
+const ProfileScreen = ({navigation}) => {
   return (
     <View style={{flex: 1, backgroundColor: '#191D18'}}>
       <Image
@@ -98,7 +99,9 @@ const ProfileScreen = () => {
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => {}}
+        onPress={() => {
+          navigation.goBack();
+        }}
         style={{
           backgroundColor: '#404040',
           padding: 5,
@@ -119,7 +122,9 @@ const ProfileScreen = () => {
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => {}}
+        onPress={() => {
+          navigation.goBack();
+        }}
         style={{
           backgroundColor: '#404040',
           padding: 5,

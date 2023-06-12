@@ -1,9 +1,12 @@
 import {View, Text, Button, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {ScrollView} from 'react-native-gesture-handler';
 import IconAnt from 'react-native-vector-icons/AntDesign';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const DataScreen = ({navigation}) => {
+  const [loading, setLoading] = useState(true);
+  const [weight, setWeight] = useState('');
   const data = [
     'trainingsession1',
     'trainingsession2',
@@ -21,6 +24,30 @@ const DataScreen = ({navigation}) => {
     'trainingsession44',
     'trainingsession55',
   ];
+
+  const [person, setPerson] = useState({
+    email: '',
+    password: '',
+    phoneNumber: '',
+    weight: '',
+  });
+
+  _retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@MyApp:dataWeight');
+      if (value !== null) {
+        // We have data!!
+        console.log(value);
+        setWeight(value);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    _retrieveData();
+  }, []);
 
   return (
     <View

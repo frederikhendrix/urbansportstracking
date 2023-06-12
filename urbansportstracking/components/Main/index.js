@@ -6,6 +6,7 @@ import DataScreen from '../../Screens/DataScreen';
 import CMJScreen from '../../Screens/CMJScreen';
 import ProfileScreen from '../../Screens/ProfileScreen';
 import DataVisualScreen from '../../Screens/DataVisualScreen';
+import LoginScreen from '../../Screens/LoginScreen';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -40,6 +41,39 @@ function DataStack() {
         component={DataVisualScreen}
         options={{
           title: 'Data Visual',
+          headerShown: true,
+          headerTintColor: '#93C123',
+          headerStyle: {
+            backgroundColor: '#404040',
+          },
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function LoginStack() {
+  return (
+    <Stack.Navigator
+      initialRouteName="LoginStack"
+      screenOptions={{headerShown: false, headerTitleAlign: 'center'}}>
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{
+          title: 'Login',
+          headerShown: true,
+          headerTintColor: '#93C123',
+          headerStyle: {
+            backgroundColor: '#404040',
+          },
+        }}
+      />
+      <Stack.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
+        options={{
+          title: 'Profile',
           headerShown: true,
           headerTintColor: '#93C123',
           headerStyle: {
@@ -112,8 +146,9 @@ function StackScreens() {
       />
       <Tab.Screen
         name="Profile"
-        component={ProfileScreen}
+        component={LoginStack}
         options={{
+          headerShown: false,
           tabBarLabel: 'Profile',
           tabBarIcon: ({color, size}) => (
             <IconAntDesign name="user" size={size} color={color} />
