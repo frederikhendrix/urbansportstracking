@@ -12,93 +12,133 @@ import blacksplashImage from '../images/blacksplash.png';
 const ProfileScreen = () => {
   return (
     <View style={{flex: 1, backgroundColor: '#191D18'}}>
-      <KeyboardAvoidingView
-        style={{flex: 1, justifyContent: 'center'}}
-        behavior="padding"
-        keyboardVerticalOffset={Platform.select({ios: 0, android: 25})}>
-        <Image
-          style={{height: 320}}
-          source={require('../images/Login_Image.png')}
-        />
+      <Image
+        style={{
+          width: '33%',
+          height: '20%',
+          alignSelf: 'center',
+          marginTop: '10%',
+        }}
+        source={require('../images/ProfileImage.png')}
+      />
+      <Text
+        style={{
+          color: '#F2F2F2',
+          fontSize: 20,
+          fontWeight: 'bold',
+          marginLeft: 40,
+          marginBottom: 10,
+          marginTop: '2%',
+        }}>
+        Profile information
+      </Text>
+      <TouchableOpacity
+        onPress={() => {}}
+        style={{
+          width: '70%',
+          marginLeft: '10%',
+          backgroundColor: '#404040',
+          padding: 10,
+          borderWidth: 2,
+          borderRadius: 10,
+        }}>
         <Text
           style={{
-            color: '#93C123',
-            fontSize: 16,
+            color: '#F2F2F2',
+            fontSize: 20,
             fontWeight: 'bold',
-            marginLeft: 40,
-            marginBottom: 10,
+            marginBottom: '2%',
+            marginTop: '2%',
           }}>
-          Email
+          John Doe
         </Text>
-        <View style={styles.container}>
-          <TextInput
-            style={styles.textInput}
-            keyboardType="email-address"
-            placeholder="Email"
-            placeholderTextColor="#A8A8A8"></TextInput>
-        </View>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {}}
+        style={{
+          width: '70%',
+          marginLeft: '10%',
+          backgroundColor: '#404040',
+          padding: 10,
+          borderWidth: 2,
+          borderRadius: 10,
+          marginTop: '2%',
+        }}>
+        <Text
+          style={{
+            color: '#F2F2F2',
+            fontSize: 20,
+            fontWeight: 'bold',
+            marginBottom: '2%',
+            marginTop: '2%',
+          }}>
+          JohnDoe@gmail.com
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {}}
+        style={{
+          width: '70%',
+          marginLeft: '10%',
+          backgroundColor: '#404040',
+          padding: 10,
+          borderWidth: 2,
+          borderRadius: 10,
+          marginTop: '2%',
+        }}>
+        <Text
+          style={{
+            color: '#F2F2F2',
+            fontSize: 20,
+            fontWeight: 'bold',
+            marginBottom: '2%',
+            marginTop: '2%',
+          }}>
+          +31 6 11111111
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {}}
+        style={{
+          backgroundColor: '#404040',
+          padding: 5,
+          borderWidth: 2,
+          borderRadius: 10,
+          marginTop: '10%',
+          alignSelf: 'center',
+        }}>
+        <Text
+          style={{
+            color: '#F2F2F2',
+            fontSize: 20,
+            fontWeight: 'bold',
+            marginBottom: '2%',
+            marginTop: '2%',
+          }}>
+          Log Out
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {}}
+        style={{
+          backgroundColor: '#404040',
+          padding: 5,
+          borderWidth: 2,
+          borderRadius: 10,
+          marginTop: '2%',
+          alignSelf: 'center',
+        }}>
         <Text
           style={{
             color: '#93C123',
-            fontSize: 16,
-            fontWeight: 700,
-            marginLeft: 40,
-            marginTop: 30,
-            marginBottom: 10,
+            fontSize: 20,
+            fontWeight: 'bold',
+            marginBottom: '2%',
+            marginTop: '2%',
           }}>
-          Password
+          Delete Account
         </Text>
-        <View style={styles.container}>
-          <TextInput
-            style={styles.textInput}
-            placeholder="Password"
-            placeholderTextColor="#A8A8A8"
-            secureTextEntry={true}></TextInput>
-        </View>
-
-        <TouchableOpacity
-          onPress={() => {}}
-          style={{
-            width: '50%',
-            alignSelf: 'center',
-            backgroundColor: '#93C123',
-            padding: 10,
-            borderRadius: 10,
-            marginBottom: 0,
-            margin: 20,
-          }}>
-          <Text
-            style={{
-              color: '#F2F2F2',
-              fontSize: 16,
-              textAlign: 'center',
-            }}>
-            Log in
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {}}
-          style={{
-            width: '50%',
-            alignSelf: 'center',
-            backgroundColor: '#191D18',
-            borderColor: '#93C123',
-            padding: 10,
-            borderWidth: 2,
-            borderRadius: 10,
-            marginBottom: 20,
-            margin: 20,
-          }}>
-          <Text
-            style={{
-              color: '#F2F2F2',
-              fontSize: 16,
-              textAlign: 'center',
-            }}>
-            Sign up
-          </Text>
-        </TouchableOpacity>
-      </KeyboardAvoidingView>
+      </TouchableOpacity>
     </View>
   );
 };
