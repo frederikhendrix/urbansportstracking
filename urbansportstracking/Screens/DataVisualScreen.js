@@ -3,8 +3,8 @@ import React from 'react';
 
 const DataVisualScreen = ({route}) => {
   const routeDate = route.params.date;
-  const routeName = route.params.name.item;
-  console.log(route.params.name.item);
+  const routeName = route.params.name;
+  console.log(route.params);
   return (
     <View
       style={{flex: 1, backgroundColor: '#191D18', flexDirection: 'column'}}>
