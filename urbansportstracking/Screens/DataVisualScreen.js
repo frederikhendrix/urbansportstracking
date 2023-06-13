@@ -24,7 +24,23 @@ const DataVisualScreen = ({route}) => {
   const [playerLoad, setPlayerLoad] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingForPlayerLoad, setIsLoadingForPlayerLoad] = useState(true);
+  const [weight, setWeight] = useState('120');
+  _retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@MyApp:dataWeight');
+      if (value !== null) {
+        // We have data!!
+        console.log(value);
+        setWeight(value);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  useEffect(() => {
+    _retrieveData();
+  }, []);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -40,9 +56,11 @@ const DataVisualScreen = ({route}) => {
         console.log(response.data);
         setData(
           response.data.impacts.map(obj => {
+            const percentageOfBodyweight =
+              (obj.impactForce / parseInt(weight, 10)) * 100;
             return {
               x: obj.frame,
-              y: obj.impactForce,
+              y: percentageOfBodyweight,
             };
           }),
         );
@@ -76,7 +94,7 @@ const DataVisualScreen = ({route}) => {
         );
         console.log('UseEffect for player load');
         // console.log(response.data);
-        GetPlayerLoadData();
+        // GetPlayerLoadData();
         setIsLoadingForPlayerLoad(false);
       } catch (error) {
         console.log(error.response + 'PlayerLoad');
@@ -86,127 +104,109 @@ const DataVisualScreen = ({route}) => {
     fetchData();
   }, [isLoading]);
 
-  function GetBarData() {
-    if (trainingSession.impacts.length > 0) {
-      const newData = trainingSession.impacts.map(obj => {
-        return {
-          x: obj.frame,
-          y: obj.impactForce,
-        };
-      });
-      setData(newData);
-    }
-  }
-  function GetPlayerLoadData() {
-    if (playerLoad.length > 0) {
-      const newData = playerLoad.map(obj => {
-        return {
-          x: obj.id,
-          y: obj.playerLoad,
-        };
-      });
-      setPlayerLoadData(newData);
-    }
-  }
-
   return (
-    <ScrollView
-      vertical
+    <View
       style={{flex: 1, backgroundColor: '#191D18', flexDirection: 'column'}}>
-      <View
-        style={{flex: 1, backgroundColor: '#191D18', flexDirection: 'column'}}>
-        <Text style={{color: '#FFFFFF', fontSize: 25}}>impact Force</Text>
-        {isLoading ? (
-          <View
-            style={{
-              backgroundColor: '#191D18',
-              flex: 1,
-              alignItems: 'center',
-              justifyContent: 'center',
-              alignContent: 'center',
-            }}>
-            <ActivityIndicator size="large" color="#FFFFFF" />
-          </View>
-        ) : (
-          <View style={{marginTop: 20}}>
-            <ScrollView horizontal>
-              <View>
-                <VictoryChart
-                  theme={VictoryTheme.material}
-                  domainPadding={50}
-                  width={900}
-                  padding={{left: 50, bottom: 40}}
-                  // containerComponent={
-                  //   <VictoryZoomContainer
-                  //     allowZoom={false}
-                  //     allowPan={true}
-                  //     zoomDimension="x"
-                  //     zoomDomain={{x: [newData[0], newData[10]]}}
-                  //     clipContainerComponent={<VictoryClipContainer />}
-                  //   />
-                  // }
-                >
-                  <VictoryBar
-                    style={{data: {fill: '#c43a31'}}}
-                    data={data}
-                    cornerRadius={{topLeft: 5, topRight: 5}}
-                    barWidth={2}
-                    padding={{left: 15, right: 15}}
-                    width={data.length}
-                    //domain={{x: [newData[0], newData[10]]}}
-                  />
-                </VictoryChart>
-              </View>
-            </ScrollView>
-          </View>
-        )}
-        <Text style={{color: '#FFFFFF', fontSize: 15}}>Player Load</Text>
-        {isLoadingForPlayerLoad ? (
-          <View
-            style={{
-              backgroundColor: '#191D18',
-              flex: 1,
-              alignItems: 'center',
-              justifyContent: 'center',
-              alignContent: 'center',
-            }}>
-            <ActivityIndicator size="large" color="#FFFFFF" />
-          </View>
-        ) : (
-          <View style={{marginTop: 20}}>
-            <ScrollView horizontal>
-              <View>
-                <VictoryChart
-                  theme={VictoryTheme.material}
-                  domainPadding={50}
-                  width={900}
-                  padding={{left: 50, bottom: 40}}
-                  // containerComponent={
-                  //   <VictoryZoomContainer
-                  //     allowZoom={false}
-                  //     allowPan={true}
-                  //     zoomDimension="x"
-                  //     zoomDomain={{x: [newData[0], newData[10]]}}
-                  //     clipContainerComponent={<VictoryClipContainer />}
-                  //   />
-                  // }
-                >
-                  <VictoryBar
-                    style={{data: {fill: '#c43a31'}}}
-                    data={playerLoadData}
-                    cornerRadius={{topLeft: 5, topRight: 5}}
-                    barWidth={2}
-                    padding={{left: 15, right: 15}}
-                    width={playerLoadData.length}
-                    //domain={{x: [newData[0], newData[10]]}}
-                  />
-                </VictoryChart>
-              </View>
-            </ScrollView>
-          </View>
-        )}
-      </View>
-    </ScrollView>
+      <ScrollView vertical>
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: '#191D18',
+            flexDirection: 'column',
+          }}>
+          <Text style={{color: '#FFFFFF', fontSize: 25}}>impact Force</Text>
+          {isLoading ? (
+            <View
+              style={{
+                backgroundColor: '#191D18',
+                flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
+                alignContent: 'center',
+              }}>
+              <ActivityIndicator size="large" color="#FFFFFF" />
+            </View>
+          ) : (
+            <View style={{marginTop: 20}}>
+              <ScrollView horizontal>
+                <View>
+                  <VictoryChart
+                    theme={VictoryTheme.material}
+                    domainPadding={50}
+                    width={900}
+                    padding={{left: 50, bottom: 40}}
+                    // containerComponent={
+                    //   <VictoryZoomContainer
+                    //     allowZoom={false}
+                    //     allowPan={true}
+                    //     zoomDimension="x"
+                    //     zoomDomain={{x: [newData[0], newData[10]]}}
+                    //     clipContainerComponent={<VictoryClipContainer />}
+                    //   />
+                    // }
+                  >
+                    <VictoryBar
+                      style={{data: {fill: '#c43a31'}}}
+                      data={data}
+                      cornerRadius={{topLeft: 5, topRight: 5}}
+                      barWidth={2}
+                      padding={{left: 15, right: 15}}
+                      width={data.length}
+                      //domain={{x: [newData[0], newData[10]]}}
+                    />
+                  </VictoryChart>
+                </View>
+              </ScrollView>
+            </View>
+          )}
+          <Text style={{color: '#FFFFFF', fontSize: 25}}>Player Load</Text>
+          {isLoadingForPlayerLoad ? (
+            <View
+              style={{
+                backgroundColor: '#191D18',
+                flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
+                alignContent: 'center',
+              }}>
+              <ActivityIndicator size="large" color="#FFFFFF" />
+            </View>
+          ) : (
+            <View style={{marginTop: 20}}>
+              <ScrollView horizontal>
+                <View>
+                  <VictoryChart
+                    theme={VictoryTheme.material}
+                    domainPadding={50}
+                    width={900}
+                    padding={{left: 50, bottom: 40}}
+                    // containerComponent={
+                    //   <VictoryZoomContainer
+                    //     allowZoom={false}
+                    //     allowPan={true}
+                    //     zoomDimension="x"
+                    //     zoomDomain={{x: [newData[0], newData[10]]}}
+                    //     clipContainerComponent={<VictoryClipContainer />}
+                    //   />
+                    // }
+                  >
+                    <VictoryBar
+                      style={{data: {fill: '#c43a31'}}}
+                      data={playerLoadData}
+                      cornerRadius={{topLeft: 5, topRight: 5}}
+                      barWidth={2}
+                      padding={{left: 15, right: 15}}
+                      width={playerLoadData.length}
+                      //domain={{x: [newData[0], newData[10]]}}
+                    />
+                  </VictoryChart>
+                </View>
+              </ScrollView>
+            </View>
+          )}
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 
