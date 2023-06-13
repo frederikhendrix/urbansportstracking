@@ -22,11 +22,11 @@ const DataScreen = ({navigation}) => {
     'trainingsession4',
     'trainingsession5',
   ];
-  const [trainingSessions, setTrainingSessions] = useState();
+  const [trainingSessions, setTrainingSessions] = useState([]);
 
   useEffect(() => {
     axios
-      .get('http://145.93.104.72:44301/api/trainingsession/all')
+      .get('http://145.93.104.170:44301/api/trainingsession/all')
       .then(response => {
         console.log(response);
         setTrainingSessions(response.data);
