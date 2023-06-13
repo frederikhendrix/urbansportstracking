@@ -4,23 +4,27 @@ import {ScrollView} from 'react-native-gesture-handler';
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import axios from 'axios';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const DataScreen = ({navigation}) => {
+  const [loading, setLoading] = useState(true);
+  const [weight, setWeight] = useState('');
   const data = [
     'trainingsession1',
     'trainingsession2',
     'trainingsession3',
     'trainingsession4',
     'trainingsession5',
-    'trainingsession1',
-    'trainingsession2',
-    'trainingsession3',
-    'trainingsession4',
-    'trainingsession5',
-    'trainingsession1',
-    'trainingsession2',
-    'trainingsession3',
-    'trainingsession4',
-    'trainingsession5',
+    'trainingsession6',
+    'trainingsession7',
+    'trainingsession8',
+    'trainingsession9',
+    'trainingsession10',
+    'trainingsession11',
+    'trainingsession22',
+    'trainingsession33',
+    'trainingsession44',
+    'trainingsession55',
   ];
   const [trainingSessions, setTrainingSessions] = useState([]);
 
@@ -34,6 +38,30 @@ const DataScreen = ({navigation}) => {
       .catch(error => {
         console.log(error.response.data);
       });
+  }, []);
+
+  const [person, setPerson] = useState({
+    email: '',
+    password: '',
+    phoneNumber: '',
+    weight: '',
+  });
+
+  _retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@MyApp:dataWeight');
+      if (value !== null) {
+        // We have data!!
+        console.log(value);
+        setWeight(value);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    _retrieveData();
   }, []);
 
   return (
@@ -66,7 +94,7 @@ const DataScreen = ({navigation}) => {
             <View
               key={index}
               style={{
-                margin: 20,
+                margin: 10,
                 flexDirection: 'column',
                 justifyContent: 'space-between',
               }}>
