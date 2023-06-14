@@ -2,6 +2,8 @@ import {View, Text, Button, TouchableOpacity} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {ScrollView} from 'react-native-gesture-handler';
 import IconAnt from 'react-native-vector-icons/AntDesign';
+import axios from 'axios';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const DataScreen = ({navigation}) => {
@@ -24,6 +26,19 @@ const DataScreen = ({navigation}) => {
     'trainingsession44',
     'trainingsession55',
   ];
+  const [trainingSessions, setTrainingSessions] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get('http://145.93.104.66:44301/api/trainingsession/all')
+      .then(response => {
+        console.log(response);
+        setTrainingSessions(response.data);
+      })
+      .catch(error => {
+        console.log(error.response.data);
+      });
+  }, []);
 
   const [person, setPerson] = useState({
     email: '',
@@ -75,7 +90,7 @@ const DataScreen = ({navigation}) => {
 
         <ScrollView>
           {/* Map through the data array and create buttons */}
-          {data.map((item, index) => (
+          {trainingSessions.map((item, index) => (
             <View
               key={index}
               style={{
@@ -90,7 +105,7 @@ const DataScreen = ({navigation}) => {
                     fontSize: 16,
                     marginBottom: 15,
                   }}>
-                  {item}
+                  {item.id}
                 </Text>
               </View>
               <View
@@ -106,13 +121,13 @@ const DataScreen = ({navigation}) => {
                     padding: 10,
                     paddingRight: 100,
                   }}>
-                  <Text style={{color: '#F2F2F2'}}>06/09/2023</Text>
+                  <Text style={{color: '#F2F2F2'}}>{item.startingTime}</Text>
                 </View>
                 <TouchableOpacity
                   onPress={() =>
                     navigation.navigate('DataVisualScreen', {
-                      name: {item},
-                      date: '06/09/2023',
+                      name: item.id,
+                      date: item.startingTime,
                     })
                   }>
                   <IconAnt name="doubleright" size={24} color="#93C123" />
