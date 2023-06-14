@@ -46,7 +46,7 @@ const DataVisualScreen = ({route}) => {
       try {
         const response = await axios
           .get(
-            'http://145.93.104.170:44301/api/trainingsession/' +
+            'http://145.93.104.66:44301/api/trainingsession/' +
               route.params.name,
           )
           .catch(error => {
@@ -78,7 +78,7 @@ const DataVisualScreen = ({route}) => {
       try {
         const response = await axios
           .get(
-            'http://145.93.104.170:44301/api/accelerationwithplayerload/all/' +
+            'http://145.93.104.66:44301/api/accelerationwithplayerload/all/' +
               route.params.name,
           )
           .catch(error => {
@@ -114,7 +114,15 @@ const DataVisualScreen = ({route}) => {
             backgroundColor: '#191D18',
             flexDirection: 'column',
           }}>
-          <Text style={{color: '#FFFFFF', fontSize: 25}}>impact Force</Text>
+          <Text
+            style={{
+              color: '#FFFFFF',
+              fontSize: 25,
+              alignSelf: 'center',
+              margin: 5,
+            }}>
+            Impact Force
+          </Text>
           {isLoading ? (
             <View
               style={{
@@ -159,7 +167,15 @@ const DataVisualScreen = ({route}) => {
               </ScrollView>
             </View>
           )}
-          <Text style={{color: '#FFFFFF', fontSize: 25}}>Player Load</Text>
+          <Text
+            style={{
+              color: '#FFFFFF',
+              fontSize: 25,
+              alignSelf: 'center',
+              margin: 5,
+            }}>
+            Player Load
+          </Text>
           {isLoadingForPlayerLoad ? (
             <View
               style={{
