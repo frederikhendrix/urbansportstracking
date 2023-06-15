@@ -6,13 +6,15 @@ import {
   ToastAndroid,
   Platform,
   AlertIOS,
+  formData,
 } from 'react-native';
 import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import IconFeather from 'react-native-vector-icons/Feather';
 import Slider from '@react-native-community/slider';
 import DocumentPicker from 'react-native-document-picker';
-
+import RNFS from 'react-native-fs';
+import axios from 'axios';
 const UploadScreen = () => {
   const [painEndured, setPainEndured] = useState('1');
   const [effectiveness, setEffectiveness] = useState('1');
@@ -21,13 +23,47 @@ const UploadScreen = () => {
   const pickCSVFile = async () => {
     try {
       const res = await DocumentPicker.pick({
-        type: [DocumentPicker.types.allFiles],
+        type: [DocumentPicker.types.csv],
       });
 
-      if (res.type === 'application/vnd.ms-excel' || res.type === 'text/csv') {
+      if (
+        res.type === 'application/vnd.ms-excel' ||
+        res[0].type === 'text/csv'
+      ) {
         // Handle the selected CSV file here
-        console.log(res.uri);
+        const formData = new FormData();
+
+        // Add file to the FormData object
+        console.log(res[0].uri);
         setFileName(res[0].name);
+        const fileData = await RNFS.readFile(res[0].uri);
+        console.log('File data:');
+        console.log(fileData);
+        formData.append('file', fileData);
+        var form = JSON.stringify({
+          UserId: 1,
+          Effect: null,
+          Pain: null,
+          file: fileData,
+        });
+        axios
+          .post(
+            'http://145.93.108.31:44301/api/File/postTrainging?' +
+              JSON.stringify({
+                UserId: 1,
+                Effect: null,
+                Pain: null,
+              }),
+            formData,
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+            },
+          )
+          .catch(error => {
+            console.log(error.data);
+          });
       } else {
         // Invalid file type selected
         console.log('Invalid file type. Please select a CSV file.');

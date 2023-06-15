@@ -46,7 +46,7 @@ const DataVisualScreen = ({route}) => {
       try {
         const response = await axios
           .get(
-            'http://145.93.104.66:44301/api/trainingsession/' +
+            'http://145.93.108.31:44301/api/trainingsession/' +
               route.params.name,
           )
           .catch(error => {
