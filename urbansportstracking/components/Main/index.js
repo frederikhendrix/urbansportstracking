@@ -99,12 +99,12 @@ function StackScreens() {
         headerTitleStyle: {color: '#93C123'},
       })}>
       <Tab.Screen
-        name="Home"
+        name="Summary"
         component={HomeScreen}
         options={{
-          tabBarLabel: 'Home',
+          tabBarLabel: 'Summary',
           tabBarIcon: ({color, size}) => (
-            <IconAwesome name="home" size={size} color={color} />
+            <IconAwesome name="info" size={size} color={color} />
           ),
           unmountOnBlur: true,
         }}
