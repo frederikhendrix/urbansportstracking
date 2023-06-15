@@ -60,14 +60,6 @@ function LoginStack() {
       <Stack.Screen
         name="Login"
         component={LoginScreen}
-        options={{
-          title: 'Login',
-          headerShown: true,
-          headerTintColor: '#93C123',
-          headerStyle: {
-            backgroundColor: '#404040',
-          },
-        }}
       />
       <Stack.Screen
         name="ProfileScreen"
