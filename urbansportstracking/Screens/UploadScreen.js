@@ -6,7 +6,6 @@ import {
   ToastAndroid,
   Platform,
   AlertIOS,
-  formData,
 } from 'react-native';
 import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -15,10 +14,13 @@ import Slider from '@react-native-community/slider';
 import DocumentPicker from 'react-native-document-picker';
 import RNFS from 'react-native-fs';
 import axios from 'axios';
+import {AxiosRequestConfig} from 'axios';
 const UploadScreen = () => {
   const [painEndured, setPainEndured] = useState('1');
   const [effectiveness, setEffectiveness] = useState('1');
   const [fileName, setFileName] = useState('File Name');
+  const [postForm, setPostForm] = useState();
+  const [postFormData, setPostFormData] = useState();
 
   const pickCSVFile = async () => {
     try {
@@ -33,37 +35,27 @@ const UploadScreen = () => {
         // Handle the selected CSV file here
         const formData = new FormData();
 
+        formData.append('file', {
+          uri: res[0].uri,
+          name: res[0].name,
+          type: 'text/csv',
+          fileData: fileData,
+        });
+
         // Add file to the FormData object
         console.log(res[0].uri);
         setFileName(res[0].name);
         const fileData = await RNFS.readFile(res[0].uri);
         console.log('File data:');
         console.log(fileData);
-        formData.append('file', fileData);
+        // formData.append('file', fileData);
         var form = JSON.stringify({
           UserId: 1,
-          Effect: null,
-          Pain: null,
-          file: fileData,
+          Effect: effectiveness,
+          Pain: painEndured,
         });
-        axios
-          .post(
-            'http://145.93.108.31:44301/api/File/postTrainging?' +
-              JSON.stringify({
-                UserId: 1,
-                Effect: null,
-                Pain: null,
-              }),
-            formData,
-            {
-              headers: {
-                'Content-Type': 'multipart/form-data',
-              },
-            },
-          )
-          .catch(error => {
-            console.log(error.data);
-          });
+        setPostForm(form);
+        setPostFormData(formData);
       } else {
         // Invalid file type selected
         console.log('Invalid file type. Please select a CSV file.');
@@ -81,6 +73,39 @@ const UploadScreen = () => {
     }
   };
 
+  const postFile = () => {
+    try {
+      if (postForm != null && postFormData != null) {
+        axios
+          .post(
+            'http://145.93.108.31:44301/api/File/postTrainging?' + postForm,
+            postFormData,
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+            },
+          )
+          .then(response => console.log(response.data))
+          .catch(error => {
+            if (error.response) {
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+            } else if (error.request) {
+              console.log(error.request);
+            } else {
+              console.log('Error', error.message);
+            }
+            console.log(error.config);
+            // Handle the error appropriately
+          });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const notifyMessage = () => {
     if (Platform.OS === 'android') {
       ToastAndroid.show('File Uploaded', ToastAndroid.SHORT);
@@ -93,6 +118,7 @@ const UploadScreen = () => {
     //here some axios post request to API
     console.log('csv file uploaded');
     notifyMessage();
+    postFile();
   };
 
   const uploadCSVFileAlerts = () => {
