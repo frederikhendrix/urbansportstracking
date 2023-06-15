@@ -25,6 +25,11 @@ const DataVisualScreen = ({route}) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingForPlayerLoad, setIsLoadingForPlayerLoad] = useState(true);
   const [weight, setWeight] = useState('120');
+  const [totalPlayerLoad, setTotalPlayerLoad] = useState(0);
+  const [totalImpactForceP, setTotalImpacForceP] = useState(0);
+  const [impactForce, setImpactForce] = useState([]);
+  const [totalImpactForceKG, setTotalImpactForceKG] = useState(0);
+  const [averageImpactForceKG, setAverageImpactForceKG] = useState(0);
   _retrieveData = async () => {
     try {
       const value = await AsyncStorage.getItem('@MyApp:dataWeight');
@@ -53,11 +58,12 @@ const DataVisualScreen = ({route}) => {
             console.log(error + 'Training');
           });
         console.log('UseEffect for training data');
-        console.log(response.data);
+        console.log(response.data.impacts.length);
+        setImpactForce(response.data);
         setData(
           response.data.impacts.map(obj => {
             const percentageOfBodyweight =
-              (obj.impactForce / parseInt(weight, 10)) * 100;
+              (obj.impactForce / 9.8 / parseInt(weight, 10)) * 100;
             return {
               x: obj.frame,
               y: percentageOfBodyweight,
@@ -78,7 +84,7 @@ const DataVisualScreen = ({route}) => {
       try {
         const response = await axios
           .get(
-            'http://145.93.104.66:44301/api/accelerationwithplayerload/all/' +
+            'http://145.93.108.31:44301/api/accelerationwithplayerload/all/' +
               route.params.name,
           )
           .catch(error => {
@@ -92,6 +98,7 @@ const DataVisualScreen = ({route}) => {
             };
           }),
         );
+        setPlayerLoad(response.data);
         console.log('UseEffect for player load');
         // console.log(response.data);
         // GetPlayerLoadData();
@@ -104,6 +111,27 @@ const DataVisualScreen = ({route}) => {
     fetchData();
   }, [isLoading]);
 
+  useEffect(() => {
+    var count = 0;
+    for (let index = 0; index < playerLoad.length; index++) {
+      const element = playerLoad[index];
+      count = count + element.playerLoad;
+    }
+    setTotalPlayerLoad(Math.floor(count));
+  }, [playerLoad]);
+
+  useEffect(() => {
+    var count = 0;
+    console.log('Useeffect impactforce');
+    if (impactForce.length !== 0) {
+      for (let index = 0; index < impactForce.impacts.length; index++) {
+        const element = impactForce.impacts[index];
+        count = count + element.impactForce / 9.8;
+      }
+      setTotalImpactForceKG(Math.floor(count));
+      setAverageImpactForceKG(Math.floor(count / impactForce.impacts.length));
+    }
+  }, [impactForce]);
   return (
     <View
       style={{flex: 1, backgroundColor: '#191D18', flexDirection: 'column'}}>
@@ -122,6 +150,24 @@ const DataVisualScreen = ({route}) => {
               margin: 5,
             }}>
             Impact Force
+          </Text>
+          <Text
+            style={{
+              color: '#FFFFFF',
+              fontSize: 25,
+              alignSelf: 'center',
+              margin: 5,
+            }}>
+            Total impact force = {totalImpactForceKG} kg
+          </Text>
+          <Text
+            style={{
+              color: '#FFFFFF',
+              fontSize: 25,
+              alignSelf: 'center',
+              margin: 5,
+            }}>
+            Average impact force = {averageImpactForceKG} kg
           </Text>
           {isLoading ? (
             <View
@@ -175,6 +221,15 @@ const DataVisualScreen = ({route}) => {
               margin: 5,
             }}>
             Player Load
+          </Text>
+          <Text
+            style={{
+              color: '#FFFFFF',
+              fontSize: 25,
+              alignSelf: 'center',
+              margin: 5,
+            }}>
+            Total Player Load= {totalPlayerLoad}
           </Text>
           {isLoadingForPlayerLoad ? (
             <View
