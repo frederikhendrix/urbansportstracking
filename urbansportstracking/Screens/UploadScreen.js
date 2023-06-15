@@ -290,7 +290,7 @@ const UploadScreen = () => {
               backgroundColor: '#404040',
             }}>
             <Text style={{fontWeight: 'bold', fontSize: 16, color: '#F2F2F2'}}>
-              Upload
+              Submit Session
             </Text>
           </TouchableOpacity>
         </View>
