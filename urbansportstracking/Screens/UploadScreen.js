@@ -191,11 +191,13 @@ const UploadScreen = () => {
             }}>
             Pain Endured
           </Text>
+          
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Text
             style={{
               fontSize: 16,
               color: '#F2F2F2',
-              marginBottom: 5,
+              marginBottom: 10
             }}>
             {painEndured}
           </Text>
@@ -208,6 +210,7 @@ const UploadScreen = () => {
             value={1}
             onValueChange={value => setPainEndured(parseInt(value))}
             style={{width: 300, marginBottom: 10}}></Slider>
+            </View>
           <Text
             style={{
               fontSize: 16,
