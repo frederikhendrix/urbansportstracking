@@ -121,12 +121,12 @@ function StackScreens() {
         }}
       />
       <Tab.Screen
-        name="Data"
+        name="Statistics"
         component={DataStack}
         options={{
           headerShown: false,
           headerTitleAlign: 'center',
-          tabBarLabel: 'Data',
+          tabBarLabel: 'Statistics',
           tabBarIcon: ({color, size}) => (
             <IconAntDesign name="linechart" size={size} color={color} />
           ),
