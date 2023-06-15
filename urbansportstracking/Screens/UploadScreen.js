@@ -18,6 +18,7 @@ import {AxiosRequestConfig} from 'axios';
 const UploadScreen = () => {
   const [painEndured, setPainEndured] = useState('1');
   const [effectiveness, setEffectiveness] = useState('1');
+  const[qualityOfSleep, setSleep] = useState('1')
   const [fileName, setFileName] = useState('File Name');
   const [postForm, setPostForm] = useState();
   const [postFormData, setPostFormData] = useState();
@@ -237,6 +238,33 @@ const UploadScreen = () => {
             maximumTrackTintColor="#93C123"
             value={1}
             onValueChange={value => setEffectiveness(parseInt(value))}
+            style={{width: 300, marginBottom: 10}}></Slider>
+            </View>
+            <Text
+            style={{
+              fontSize: 16,
+              color: '#F2F2F2',
+              marginBottom: 10,
+            }}>
+            Quality Of Sleep
+          </Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Text
+            style={{
+              fontSize: 16,
+              color: '#F2F2F2',
+              marginBottom: 10,
+            }}>
+            {qualityOfSleep}
+          </Text>
+          <Slider
+            minimumValue={1}
+            maximumValue={10}
+            thumbTintColor="#8E23C1"
+            minimumTrackTintColor="#93C123"
+            maximumTrackTintColor="#93C123"
+            value={1}
+            onValueChange={value => setSleep(parseInt(value))}
             style={{width: 300, marginBottom: 10}}></Slider>
             </View>
         </View>
