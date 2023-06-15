@@ -25,10 +25,10 @@ function DataStack() {
       initialRouteName="DataStack"
       screenOptions={{headerShown: false, headerTitleAlign: 'center'}}>
       <Stack.Screen
-        name="Data"
+        name="Statistics"
         component={DataScreen}
         options={{
-          title: 'Data',
+          title: 'Statistics',
           headerShown: true,
           headerTintColor: '#93C123',
           headerStyle: {
