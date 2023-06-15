@@ -10,6 +10,7 @@ import {
   VictoryTheme,
   VictoryLine,
 } from 'victory-native';
+
 const CMJScreen = () => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
