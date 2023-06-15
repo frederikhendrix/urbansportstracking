@@ -115,7 +115,7 @@ function StackScreens() {
         options={{
           tabBarLabel: 'Upload',
           tabBarIcon: ({color, size}) => (
-            <IconFeather name="folder-plus" size={size} color={color} />
+            <IconAwesome5 name="folder-plus" size={size} color={color} />
           ),
           unmountOnBlur: true,
         }}
