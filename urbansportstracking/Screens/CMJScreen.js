@@ -47,14 +47,14 @@ const CMJScreen = () => {
   return (
     <View
       style={{flex: 1, backgroundColor: '#191D18', flexDirection: 'column'}}>
-        <Text style={{ fontSize: 16,
+        <Text style={{ fontSize: 16, // TODO: Add date
               color: '#F2F2F2',
               fontWeight: 600,
               fontSize: 20,
               marginBottom: 10,
               marginTop:10,
               marginLeft: 35}}>
-        06/05/2023
+        
         </Text>
       {isLoading ? (
         <View
