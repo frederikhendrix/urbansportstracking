@@ -151,7 +151,7 @@ function StackScreens() {
           headerShown: false,
           tabBarLabel: 'Profile',
           tabBarIcon: ({color, size}) => (
-            <IconAntDesign name="user" size={size} color={color} />
+            <IconAwesome name="user" size={size} color={color} />
           ),
           unmountOnBlur: true,
         }}
