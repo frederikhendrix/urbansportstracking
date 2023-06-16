@@ -123,7 +123,7 @@ const DataScreen = ({navigation}) => {
                     padding: 10,
                     paddingRight: 100,
                   }}>
-                  <Text style={{color: '#F2F2F2'}}>{item.startingTime}</Text>
+                  <Text style={{color: '#F2F2F2', fontSize: 16,}}>{item.startingTime}</Text>
                 </View>
                 <TouchableOpacity
                   onPress={() =>
@@ -137,7 +137,6 @@ const DataScreen = ({navigation}) => {
             fontWeight: 'bold',
             fontSize: 16,
             color: '#93C123',
-            marginBottom: 20,
           }}>
           Open file
         </Text>

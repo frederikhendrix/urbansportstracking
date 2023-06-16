@@ -54,7 +54,7 @@ const CMJScreen = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          'http://192.168.2.18:44301/api/countermovementjump/all',
+          'http://192.168.2.18:44301/api/trainingsession/all',
         );
         const timestamp = 1 / 60;
         setData(
