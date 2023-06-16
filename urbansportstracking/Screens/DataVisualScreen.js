@@ -184,7 +184,7 @@ const DataVisualScreen = ({route}) => {
           <Text
             style={{
               color: '#93C123',
-              fontSize: 20,
+              fontSize: 16,
               alignSelf: 'center',
               margin: 5,
             }}>
