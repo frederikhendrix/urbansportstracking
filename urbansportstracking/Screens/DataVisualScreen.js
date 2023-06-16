@@ -13,6 +13,7 @@ import {
   VictoryAxis,
   VictoryTheme,
 } from 'victory-native';
+import Slider from '@react-native-community/slider';
 import {Data} from 'victory';
 const DataVisualScreen = ({route}) => {
   const routeDate = route.params.date;
@@ -27,6 +28,7 @@ const DataVisualScreen = ({route}) => {
   const [weight, setWeight] = useState('120');
   const [totalPlayerLoad, setTotalPlayerLoad] = useState(0);
 
+  const [threshHold, setThreshHold] = useState(0);
   const [averagePlayerLoad, setAveragePlayerLoad] = useState(0);
   const [totalImpactForceP, setTotalImpacForceP] = useState(0);
   const [impactForce, setImpactForce] = useState([]);
@@ -125,6 +127,21 @@ const DataVisualScreen = ({route}) => {
 
   useEffect(() => {
     var count = 0;
+    var amount = 0;
+    console.log('Useeffect impactforce average');
+    if (impactForce.length !== 0) {
+      for (let index = 0; index < impactForce.impacts.length; index++) {
+        const element = impactForce.impacts[index];
+        if (element.impactForce / 9.8 > threshHold) {
+          count = count + element.impactForce / 9.8;
+          amount++;
+        }
+      }
+      setAverageImpactForceKG(Math.floor(count / amount));
+    }
+  }, [threshHold]);
+  useEffect(() => {
+    var count = 0;
     console.log('Useeffect impactforce');
     if (impactForce.length !== 0) {
       for (let index = 0; index < impactForce.impacts.length; index++) {
@@ -132,7 +149,7 @@ const DataVisualScreen = ({route}) => {
         count = count + element.impactForce / 9.8;
       }
       setTotalImpactForceKG(Math.floor(count / parseInt(weight)));
-      setAverageImpactForceKG(Math.floor(count / impactForce.impacts.length));
+      // setAverageImpactForceKG(Math.floor(count / impactForce.impacts.length));
     }
   }, [impactForce]);
   return (
@@ -172,6 +189,28 @@ const DataVisualScreen = ({route}) => {
             }}>
             Average impact force = {averageImpactForceKG} kg
           </Text>
+          <Text
+            style={{
+              color: '#FFFFFF',
+              fontSize: 16,
+              alignSelf: 'center',
+              margin: 5,
+            }}>
+            {threshHold}
+          </Text>
+          <Slider
+            minimumValue={0}
+            maximumValue={100}
+            thumbTintColor="#8E23C1"
+            minimumTrackTintColor="#93C123"
+            maximumTrackTintColor="#93C123"
+            value={1}
+            onValueChange={value => setThreshHold(parseInt(value))}
+            style={{
+              width: 300,
+              marginBottom: 10,
+              alignSelf: 'center',
+            }}></Slider>
           {isLoading ? (
             <View
               style={{
