@@ -10,23 +10,57 @@ import {
   VictoryTheme,
   VictoryLine,
 } from 'victory-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const CMJScreen = () => {
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [totalDistance, setTotalDistance] = useState(0);
+  const [maxPositiveVelocity, setMaxPositiveVelocity] = useState(0);
+
+  const [minPositiveVelocity, setMinPositiveVelocity] = useState(0);
+  useEffect(() => {
+    if (data.length !== 0) {
+      CalculateDistance();
+    }
+  }, [data]);
+  const CalculateDistance = () => {
+    const timestamp = 1 / 60;
+    var TotalDistance = 0;
+    var maxPositiveValue = 0;
+    var minPositiveValue = 0;
+    for (let index = 0; index < data.length; index++) {
+      const element = data[index];
+      var distance = 0;
+      if (element.y < minPositiveValue) {
+        minPositiveValue = element.y;
+      }
+      if (element.y > maxPositiveValue) {
+        maxPositiveValue = element.y;
+      }
+      if (element.y < 0) {
+        distance = 0.5 * -element.y * (timestamp * timestamp);
+      } else {
+        distance = 0.5 * element.y * (timestamp * timestamp);
+      }
+      TotalDistance = TotalDistance + distance;
+    }
+    setMaxPositiveVelocity(maxPositiveValue);
+    setMinPositiveVelocity(minPositiveValue);
+    setTotalDistance(TotalDistance);
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
           'http://192.168.2.18:44301/api/countermovementjump/all',
         );
-        console.log('UseEffect for CMJ Data');
-        console.log(response.data);
+        const timestamp = 1 / 60;
         setData(
           response.data.map(obj => {
             return {
-              x: obj.id,
-              y: obj.acc_Y,
+              x: obj.id * timestamp,
+              y: obj.acc_Z,
             };
           }),
         );
@@ -74,6 +108,15 @@ const CMJScreen = () => {
                   width={data.length}
                 />
               </VictoryChart>
+              <Text style={{color: '#FFFFFF'}}>
+                Total Distance covered = {totalDistance}
+              </Text>
+              <Text style={{color: '#FFFFFF'}}>
+                Maximum acceleration = {maxPositiveVelocity}
+              </Text>
+              <Text style={{color: '#FFFFFF'}}>
+                Maximum deceleration = {minPositiveVelocity}
+              </Text>
             </View>
           </ScrollView>
         </View>
