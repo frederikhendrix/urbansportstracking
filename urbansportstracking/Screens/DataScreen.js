@@ -30,7 +30,7 @@ const DataScreen = ({navigation}) => {
 
   useEffect(() => {
     axios
-      .get('http://192.168.2.18:44301/api/trainingsession/all')
+      .get('http://192.168.2.18:44301/api/trainingsession/all ')
       .then(response => {
         console.log(response);
         setTrainingSessions(response.data);
@@ -102,9 +102,11 @@ const DataScreen = ({navigation}) => {
                 <Text
                   style={{
                     color: '#F2F2F2',
-                    fontSize: 16,
+                    fontSize: 18,
+                    marginTop: 5,
                     marginBottom: 15,
                   }}>
+                    <Text>Training session </Text>
                   {item.id}
                 </Text>
               </View>
