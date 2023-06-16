@@ -41,16 +41,16 @@ const ProfileScreen = ({navigation}) => {
           marginLeft: '10%',
           backgroundColor: '#404040',
           padding: 10,
-          borderWidth: 2,
+          borderWidth: 0,
           borderRadius: 10,
         }}>
         <Text
           style={{
             color: '#F2F2F2',
-            fontSize: 20,
-            fontWeight: 'bold',
+            fontSize: 18,
             marginBottom: '2%',
             marginTop: '2%',
+            marginLeft: '2%',
           }}>
           John Doe
         </Text>
@@ -62,17 +62,17 @@ const ProfileScreen = ({navigation}) => {
           marginLeft: '10%',
           backgroundColor: '#404040',
           padding: 10,
-          borderWidth: 2,
+          borderWidth: 0,
           borderRadius: 10,
           marginTop: '2%',
         }}>
         <Text
           style={{
             color: '#F2F2F2',
-            fontSize: 20,
-            fontWeight: 'bold',
+            fontSize: 18,
             marginBottom: '2%',
             marginTop: '2%',
+            marginLeft: '2%',
           }}>
           JohnDoe@gmail.com
         </Text>
@@ -84,17 +84,17 @@ const ProfileScreen = ({navigation}) => {
           marginLeft: '10%',
           backgroundColor: '#404040',
           padding: 10,
-          borderWidth: 2,
+          borderWidth: 0,
           borderRadius: 10,
           marginTop: '2%',
         }}>
         <Text
           style={{
             color: '#F2F2F2',
-            fontSize: 20,
-            fontWeight: 'bold',
+            fontSize: 18,
             marginBottom: '2%',
             marginTop: '2%',
+            marginLeft: '2%',
           }}>
           +31 6 11111111
         </Text>
