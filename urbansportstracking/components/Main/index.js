@@ -89,16 +89,21 @@ function LoginStack() {
 function StackScreens() {
   return (
     <Tab.Navigator
-      initialRouteName="Feed"
-      screenOptions={({route}) => ({
-        tabBarInactiveTintColor: '#93C123',
-        tabBarActiveTintColor: '#F2F2F2',
-        tabBarStyle: '#000000',
-        headerTitleAlign: 'center',
-        tabBarStyle: {backgroundColor: '#404040'},
-        headerStyle: {backgroundColor: '#404040'},
-        headerTitleStyle: {color: '#93C123'},
-      })}>
+    initialRouteName="Feed"
+    screenOptions={({route}) => ({
+      tabBarInactiveTintColor: '#93C123',
+      tabBarActiveTintColor: '#F2F2F2',
+      headerTitleAlign: 'center',
+      tabBarStyle: {backgroundColor: '#404040'},
+      headerStyle: {
+        backgroundColor: '#191D18',
+        shadowColor: '#000000',
+      },
+      headerTitleStyle: {
+        fontSize: 27,
+        color: '#93C123',
+      },
+    })}>
       <Tab.Screen
         name="Summary"
         component={HomeScreen}
