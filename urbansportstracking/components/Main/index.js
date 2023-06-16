@@ -83,7 +83,7 @@ function StackScreens() {
       initialRouteName="Feed"
       screenOptions={({route}) => ({
         tabBarInactiveTintColor: '#93C123',
-        tabBarActiveTintColor: '#191D18',
+        tabBarActiveTintColor: '#F2F2F2',
         tabBarStyle: '#000000',
         headerTitleAlign: 'center',
         tabBarStyle: {backgroundColor: '#404040'},
