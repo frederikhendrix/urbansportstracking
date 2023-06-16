@@ -131,9 +131,9 @@ const ProfileScreen = ({navigation}) => {
         style={{
           backgroundColor: '#404040',
           padding: 5,
-          borderWidth: 2,
+          borderWidth: 0,
           borderRadius: 10,
-          marginTop: '2%',
+          marginTop: '4%',
           alignSelf: 'center',
         }}>
         <Text
@@ -143,6 +143,8 @@ const ProfileScreen = ({navigation}) => {
             fontWeight: 'bold',
             marginBottom: '2%',
             marginTop: '2%',
+            paddingLeft: '3%',
+            paddingRight: '3%',
           }}>
           Delete Account
         </Text>
