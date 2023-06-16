@@ -29,7 +29,7 @@ const ProfileScreen = ({navigation}) => {
           fontWeight: 'bold',
           marginLeft: 40,
           marginBottom: 10,
-          marginTop: '2%',
+          marginTop: '10%',
         }}>
         Profile information
       </Text>
@@ -37,6 +37,7 @@ const ProfileScreen = ({navigation}) => {
         onPress={() => {}}
         style={{
           width: '70%',
+          marginTop: 10,
           marginLeft: '10%',
           backgroundColor: '#404040',
           padding: 10,
