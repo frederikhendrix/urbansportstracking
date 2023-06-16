@@ -34,7 +34,7 @@ const HomeScreen = () => {
               marginLeft: 40,
               marginBottom: 15,
             }}>
-            <Text style={{fontWeight: 'bold', fontSize: 20, color: '#F2F2F2'}}>
+            <Text style={{fontWeight: 'bold', fontSize: 22, color: '#F2F2F2'}}>
               Recent Statistics
             </Text>
           </View>
