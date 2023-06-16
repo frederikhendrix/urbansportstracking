@@ -43,11 +43,14 @@ function DataStack() {
         name="DataVisualScreen"
         component={DataVisualScreen}
         options={{
-          title: 'Data Visual',
+          title: 'Training Session',
           headerShown: true,
           headerTintColor: '#93C123',
           headerStyle: {
-            backgroundColor: '#404040',
+            backgroundColor: '#191D18',
+          },
+          headerTitleStyle: {
+            fontSize: 27,
           },
         }}
       />
