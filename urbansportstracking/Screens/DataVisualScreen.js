@@ -243,7 +243,7 @@ const DataVisualScreen = ({route}) => {
                     // }
                   >
                     <VictoryBar
-                      style={{data: {fill: '#c43a31'}}}
+                      style={{data: {fill: '#93C123'}}}
                       data={data}
                       cornerRadius={{topLeft: 5, topRight: 5}}
                       barWidth={2}
@@ -259,7 +259,7 @@ const DataVisualScreen = ({route}) => {
           <Text
             style={{
               color: '#FFFFFF',
-              fontSize: 25,
+              fontSize: 22,
               alignSelf: 'center',
               margin: 5,
             }}>
@@ -267,7 +267,7 @@ const DataVisualScreen = ({route}) => {
           </Text>
           <Text
             style={{
-              color: '#FFFFFF',
+              color: '#93C123',
               fontSize: 16,
               alignSelf: 'center',
               margin: 5,
@@ -276,7 +276,7 @@ const DataVisualScreen = ({route}) => {
           </Text>
           <Text
             style={{
-              color: '#FFFFFF',
+              color: '#93C123',
               fontSize: 16,
               alignSelf: 'center',
               margin: 5,
@@ -314,7 +314,7 @@ const DataVisualScreen = ({route}) => {
                     // }
                   >
                     <VictoryBar
-                      style={{data: {fill: '#c43a31'}}}
+                      style={{data: {fill: '#93C123'}}}
                       data={playerLoadData}
                       cornerRadius={{topLeft: 5, topRight: 5}}
                       barWidth={2}
