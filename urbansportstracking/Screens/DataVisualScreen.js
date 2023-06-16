@@ -165,9 +165,10 @@ const DataVisualScreen = ({route}) => {
           <Text
             style={{
               color: '#FFFFFF',
-              fontSize: 25,
+              fontSize: 20,
               alignSelf: 'center',
               margin: 5,
+              marginTop: 10,
             }}>
             Impact Force
           </Text>
@@ -182,8 +183,8 @@ const DataVisualScreen = ({route}) => {
           </Text>
           <Text
             style={{
-              color: '#FFFFFF',
-              fontSize: 25,
+              color: '#93C123',
+              fontSize: 20,
               alignSelf: 'center',
               margin: 5,
             }}>
