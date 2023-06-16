@@ -96,7 +96,7 @@ function StackScreens() {
         options={{
           tabBarLabel: 'Summary',
           tabBarIcon: ({color, size}) => (
-            <IconAwesome name="info" size={size} color={color} />
+            <IconAwesome name="list" size={size} color={color} />
           ),
           unmountOnBlur: true,
         }}
