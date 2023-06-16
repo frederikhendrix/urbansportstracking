@@ -18,6 +18,7 @@ import {AxiosRequestConfig} from 'axios';
 const UploadScreen = () => {
   const [painEndured, setPainEndured] = useState('1');
   const [effectiveness, setEffectiveness] = useState('1');
+  const[qualityOfSleep, setSleep] = useState('1')
   const [fileName, setFileName] = useState('File Name');
   const [postForm, setPostForm] = useState();
   const [postFormData, setPostFormData] = useState();
@@ -191,11 +192,13 @@ const UploadScreen = () => {
             }}>
             Pain Endured
           </Text>
+          
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Text
             style={{
               fontSize: 16,
               color: '#F2F2F2',
-              marginBottom: 5,
+              marginBottom: 10
             }}>
             {painEndured}
           </Text>
@@ -208,6 +211,8 @@ const UploadScreen = () => {
             value={1}
             onValueChange={value => setPainEndured(parseInt(value))}
             style={{width: 300, marginBottom: 10}}></Slider>
+            </View>
+            
           <Text
             style={{
               fontSize: 16,
@@ -216,11 +221,12 @@ const UploadScreen = () => {
             }}>
             Effectiveness
           </Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Text
             style={{
               fontSize: 16,
               color: '#F2F2F2',
-              marginBottom: 5,
+              marginBottom: 10,
             }}>
             {effectiveness}
           </Text>
@@ -233,6 +239,34 @@ const UploadScreen = () => {
             value={1}
             onValueChange={value => setEffectiveness(parseInt(value))}
             style={{width: 300, marginBottom: 10}}></Slider>
+            </View>
+            <Text
+            style={{
+              fontSize: 16,
+              color: '#F2F2F2',
+              marginBottom: 10,
+            }}>
+            Quality Of Sleep
+          </Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Text
+            style={{
+              fontSize: 16,
+              color: '#F2F2F2',
+              marginBottom: 10,
+            }}>
+            {qualityOfSleep}
+          </Text>
+          <Slider
+            minimumValue={1}
+            maximumValue={10}
+            thumbTintColor="#8E23C1"
+            minimumTrackTintColor="#93C123"
+            maximumTrackTintColor="#93C123"
+            value={1}
+            onValueChange={value => setSleep(parseInt(value))}
+            style={{width: 300, marginBottom: 10}}></Slider>
+            </View>
         </View>
       </View>
       <View
@@ -256,7 +290,7 @@ const UploadScreen = () => {
               backgroundColor: '#404040',
             }}>
             <Text style={{fontWeight: 'bold', fontSize: 16, color: '#F2F2F2'}}>
-              Upload
+              Submit Session
             </Text>
           </TouchableOpacity>
         </View>

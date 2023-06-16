@@ -1,4 +1,5 @@
 import {View, Text, ActivityIndicator, ScrollView} from 'react-native';
+import Slider from '@react-native-community/slider';
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {
@@ -76,6 +77,16 @@ const CMJScreen = () => {
   return (
     <View
       style={{flex: 1, backgroundColor: '#191D18', flexDirection: 'column'}}>
+      <Text
+        style={{
+          fontSize: 16, // TODO: Add date
+          color: '#F2F2F2',
+          fontWeight: 600,
+          fontSize: 20,
+          marginBottom: 10,
+          marginTop: 10,
+          marginLeft: 35,
+        }}></Text>
       {isLoading ? (
         <View
           style={{
@@ -108,6 +119,7 @@ const CMJScreen = () => {
                   width={data.length}
                 />
               </VictoryChart>
+
               <Text style={{color: '#FFFFFF'}}>
                 Total Distance covered = {totalDistance}
               </Text>
