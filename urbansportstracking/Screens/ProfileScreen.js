@@ -56,15 +56,16 @@ const ProfileScreen = ({navigation}) => {
         </Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.editButton}>
-          <Text style={{
-            marginLeft: "85%",
+        <Text
+          style={{
+            marginLeft: '85%',
             color: '#93C123',
             fontSize: 18,
-            marginTop: "-10%",
+            marginTop: '-10%',
           }}>
           Edit
-          </Text>
-        </TouchableOpacity>
+        </Text>
+      </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {}}
         style={{
@@ -88,15 +89,16 @@ const ProfileScreen = ({navigation}) => {
         </Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.editButton}>
-          <Text style={{
-            marginLeft: "85%",
+        <Text
+          style={{
+            marginLeft: '85%',
             color: '#93C123',
             fontSize: 18,
-            marginTop: "-10%",
+            marginTop: '-10%',
           }}>
           Edit
-          </Text>
-        </TouchableOpacity>
+        </Text>
+      </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {}}
         style={{
@@ -120,15 +122,16 @@ const ProfileScreen = ({navigation}) => {
         </Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.editButton}>
-          <Text style={{
-            marginLeft: "85%",
+        <Text
+          style={{
+            marginLeft: '85%',
             color: '#93C123',
             fontSize: 18,
-            marginTop: "-10%",
+            marginTop: '-10%',
           }}>
           Edit
-          </Text>
-        </TouchableOpacity>
+        </Text>
+      </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
           navigation.goBack();
@@ -138,7 +141,7 @@ const ProfileScreen = ({navigation}) => {
           padding: 5,
           borderWidth: 0,
           borderRadius: 10,
-          marginTop: '12%',
+          marginTop: '5%',
           alignSelf: 'center',
         }}>
         <Text
