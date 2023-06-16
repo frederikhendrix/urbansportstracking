@@ -74,7 +74,7 @@ const ProfileScreen = ({navigation}) => {
           padding: 10,
           borderWidth: 0,
           borderRadius: 10,
-          marginTop: '2%',
+          marginTop: '5%',
         }}>
         <Text
           style={{
@@ -106,7 +106,7 @@ const ProfileScreen = ({navigation}) => {
           padding: 10,
           borderWidth: 0,
           borderRadius: 10,
-          marginTop: '2%',
+          marginTop: '5%',
         }}>
         <Text
           style={{
@@ -138,7 +138,7 @@ const ProfileScreen = ({navigation}) => {
           padding: 5,
           borderWidth: 0,
           borderRadius: 10,
-          marginTop: '18%',
+          marginTop: '12%',
           alignSelf: 'center',
         }}>
         <Text
