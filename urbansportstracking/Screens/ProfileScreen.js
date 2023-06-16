@@ -87,6 +87,16 @@ const ProfileScreen = ({navigation}) => {
           JohnDoe@gmail.com
         </Text>
       </TouchableOpacity>
+      <TouchableOpacity style={styles.editButton}>
+          <Text style={{
+            marginLeft: "85%",
+            color: '#93C123',
+            fontSize: 18,
+            marginTop: "-10%",
+          }}>
+          Edit
+          </Text>
+        </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {}}
         style={{
