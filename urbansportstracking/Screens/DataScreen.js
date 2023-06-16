@@ -30,7 +30,7 @@ const DataScreen = ({navigation}) => {
 
   useEffect(() => {
     axios
-      .get('http://145.93.104.66:44301/api/trainingsession/all')
+      .get('http://192.168.2.18:44301/api/trainingsession/all')
       .then(response => {
         console.log(response);
         setTrainingSessions(response.data);
