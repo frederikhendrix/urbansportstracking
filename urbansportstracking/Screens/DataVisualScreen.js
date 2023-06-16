@@ -26,6 +26,8 @@ const DataVisualScreen = ({route}) => {
   const [isLoadingForPlayerLoad, setIsLoadingForPlayerLoad] = useState(true);
   const [weight, setWeight] = useState('120');
   const [totalPlayerLoad, setTotalPlayerLoad] = useState(0);
+
+  const [averagePlayerLoad, setAveragePlayerLoad] = useState(0);
   const [totalImpactForceP, setTotalImpacForceP] = useState(0);
   const [impactForce, setImpactForce] = useState([]);
   const [totalImpactForceKG, setTotalImpactForceKG] = useState(0);
@@ -51,7 +53,7 @@ const DataVisualScreen = ({route}) => {
       try {
         const response = await axios
           .get(
-            'http://145.93.108.31:44301/api/trainingsession/' +
+            'http://192.168.2.18:44301/api/trainingsession/' +
               route.params.name,
           )
           .catch(error => {
@@ -84,7 +86,7 @@ const DataVisualScreen = ({route}) => {
       try {
         const response = await axios
           .get(
-            'http://145.93.108.31:44301/api/accelerationwithplayerload/all/' +
+            'http://192.168.2.18:44301/api/accelerationwithplayerload/all/' +
               route.params.name,
           )
           .catch(error => {
@@ -118,6 +120,7 @@ const DataVisualScreen = ({route}) => {
       count = count + element.playerLoad;
     }
     setTotalPlayerLoad(Math.floor(count));
+    setAveragePlayerLoad(Math.floor(count / playerLoad.length));
   }, [playerLoad]);
 
   useEffect(() => {
@@ -128,7 +131,7 @@ const DataVisualScreen = ({route}) => {
         const element = impactForce.impacts[index];
         count = count + element.impactForce / 9.8;
       }
-      setTotalImpactForceKG(Math.floor(count));
+      setTotalImpactForceKG(Math.floor(count / parseInt(weight)));
       setAverageImpactForceKG(Math.floor(count / impactForce.impacts.length));
     }
   }, [impactForce]);
@@ -154,11 +157,11 @@ const DataVisualScreen = ({route}) => {
           <Text
             style={{
               color: '#FFFFFF',
-              fontSize: 25,
+              fontSize: 16,
               alignSelf: 'center',
               margin: 5,
             }}>
-            Total impact force = {totalImpactForceKG} kg
+            Total impact force = {totalImpactForceKG} Times bodyweight
           </Text>
           <Text
             style={{
@@ -225,11 +228,20 @@ const DataVisualScreen = ({route}) => {
           <Text
             style={{
               color: '#FFFFFF',
-              fontSize: 25,
+              fontSize: 16,
               alignSelf: 'center',
               margin: 5,
             }}>
-            Total Player Load= {totalPlayerLoad}
+            Total Player Load = {totalPlayerLoad}
+          </Text>
+          <Text
+            style={{
+              color: '#FFFFFF',
+              fontSize: 16,
+              alignSelf: 'center',
+              margin: 5,
+            }}>
+            Average Player Load = {averagePlayerLoad}
           </Text>
           {isLoadingForPlayerLoad ? (
             <View

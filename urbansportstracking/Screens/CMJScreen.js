@@ -18,7 +18,7 @@ const CMJScreen = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          'http://145.93.108.31:44301/api/countermovementjump/all',
+          'http://192.168.2.18:44301/api/countermovementjump/all',
         );
         console.log('UseEffect for CMJ Data');
         console.log(response.data);
