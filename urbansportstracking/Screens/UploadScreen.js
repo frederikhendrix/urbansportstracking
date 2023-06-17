@@ -173,13 +173,14 @@ const UploadScreen = () => {
           style={{
             alignSelf: 'flex-start',
             margin: 10,
-            marginLeft: 40,
+            marginLeft: 45,
             marginBottom: 40,
+            marginTop: -3,
           }}>
           <Text
             style={{
               fontWeight: 'bold',
-              fontSize: 16,
+              fontSize: 20,
               color: '#F2F2F2',
               marginBottom: 20,
             }}>
