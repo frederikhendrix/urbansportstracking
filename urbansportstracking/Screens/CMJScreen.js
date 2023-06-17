@@ -121,14 +121,14 @@ const CMJScreen = () => {
               </VictoryChart>
                 
                 <Text style={{color: '#FFFFFF'}}> Test</Text>
-                  <View style={{display:"flex", marginLeft:110}}>
-              <Text style={{color: '#FFFFFF'}}>
+                  <View style={{display:"flex", marginLeft:110, marginTop: 20, gap:5}}>
+              <Text style={{color: '#FFFFFF', fontSize:15}}>
                 Total Distance covered = {totalDistance}
               </Text>
-              <Text style={{color: '#FFFFFF'}}>
+              <Text style={{color: '#FFFFFF', fontSize:15}}>
                 Maximum acceleration = {maxPositiveVelocity}
               </Text>
-              <Text style={{color: '#FFFFFF'}}>
+              <Text style={{color: '#FFFFFF', fontSize:15}}>
                 Maximum deceleration = {minPositiveVelocity}
               </Text>
               </View>
