@@ -148,7 +148,7 @@ const UploadScreen = () => {
           height: '40%',
           alignItems: 'center',
           justifyContent: 'center',
-          marginTop: 40,
+          marginTop: 10,
         }}>
         <TouchableOpacity onPress={pickCSVFile}>
         <IconAwesome5 name="folder-plus" size={100} color="#93C123" />
