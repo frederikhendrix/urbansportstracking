@@ -54,7 +54,7 @@ const CMJScreen = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          'http://172.17.144.1:44301/api/countermovementjump/all',
+          'http://192.168.2.18:44301/api/countermovementjump/all',
         );
         const timestamp = 1 / 60;
         setData(
@@ -120,7 +120,7 @@ const CMJScreen = () => {
                 />
               </VictoryChart>
                 
-                <Text style={{color: '#FFFFFF'}}> Test</Text>
+                <Text style={{color: '#93C123', marginLeft:75, marginTop: 10, fontSize: 23, fontWeight: 500}}> Statistics - Fatiguness</Text>
                   <View style={{display:"flex", marginLeft:110, marginTop: 20, gap:5}}>
               <Text style={{color: '#FFFFFF', fontSize:15}}>
                 Total Distance covered = {totalDistance}
