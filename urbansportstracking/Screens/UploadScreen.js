@@ -80,7 +80,7 @@ const UploadScreen = () => {
       if (postForm != null && postFormData != null) {
         axios
           .post(
-            'http://192.168.2.18:44301/api/File/postTrainging?' + postForm,
+            'http://145.93.104.250:44301/api/File/postTrainging?' + postForm,
             postFormData,
             {
               headers: {
@@ -151,7 +151,7 @@ const UploadScreen = () => {
           marginTop: 10,
         }}>
         <TouchableOpacity onPress={pickCSVFile}>
-        <IconAwesome5 name="folder-plus" size={100} color="#93C123" />
+          <IconAwesome5 name="folder-plus" size={100} color="#93C123" />
         </TouchableOpacity>
         <Text
           style={{

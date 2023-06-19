@@ -54,7 +54,7 @@ const CMJScreen = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          'http://192.168.2.18:44301/api/trainingsession/all',
+          'http://145.93.104.250:44301/api/countermovementjump/all',
         );
         const timestamp = 1 / 60;
         setData(
@@ -74,12 +74,29 @@ const CMJScreen = () => {
 
     fetchData();
   }, []);
+  const chartTheme = {
+    axis: {
+      style: {
+        axis: {
+          stroke: 'white',
+        },
+        grid: {
+          stroke: 'white', //CHANGE COLOR OF X-AXIS GRID LINES
+          strokeDasharray: '3',
+        },
+        tickLabels: {
+          // this changed the color of my numbers to white
+          fill: 'white',
+        },
+      },
+    },
+  };
   return (
     <View
       style={{flex: 1, backgroundColor: '#191D18', flexDirection: 'column'}}>
       <Text
         style={{
-          fontSize: 16, 
+          fontSize: 16,
           color: '#F2F2F2',
           fontWeight: 600,
           fontSize: 20,
@@ -100,16 +117,42 @@ const CMJScreen = () => {
         </View>
       ) : (
         <View style={{marginTop: 20}}>
-          <ScrollView horizontal>
-            <View>
+          <View>
+            <ScrollView horizontal>
               <VictoryChart
                 theme={VictoryTheme.material}
                 domainPadding={50}
                 width={900}
                 padding={{left: 50, bottom: 40}}>
+                <VictoryAxis
+                  style={{
+                    tickLabels: {
+                      fill: '#FFFFFF',
+                      fontSize: 0,
+                    },
+                    axisLabel: {
+                      fill: '#FFFFFF',
+                      fontSize: 20,
+                    },
+                  }}
+                />
+                <VictoryAxis
+                  style={{
+                    tickLabels: {
+                      fill: '#FFFFFF',
+                      fontSize: 16,
+                    },
+                    axisLabel: {
+                      fill: '#FFFFFF',
+                      fontSize: 10,
+                    },
+                  }}
+                  label="Acceleration in m"
+                  dependentAxis
+                />
                 <VictoryLine
                   style={{
-                    data: {stroke: '#c43a31'},
+                    data: {stroke: '#93C123'},
                     parent: {border: '1px solid #ccc'},
                   }}
                   data={data}
@@ -119,21 +162,36 @@ const CMJScreen = () => {
                   width={data.length}
                 />
               </VictoryChart>
-                
-                <Text style={{color: '#93C123', marginLeft:75, marginTop: 10, fontSize: 23, fontWeight: 500}}> Statistics - Fatiguness</Text>
-                  <View style={{display:"flex", marginLeft:110, marginTop: 20, gap:5}}>
-              <Text style={{color: '#FFFFFF', fontSize:15}}>
-                Total Distance covered = {totalDistance}
+            </ScrollView>
+            <Text
+              style={{
+                color: '#93C123',
+                marginLeft: 75,
+                marginTop: 10,
+                fontSize: 23,
+                fontWeight: 500,
+              }}>
+              {' '}
+              Statistics - Fatigueness
+            </Text>
+            <View
+              style={{
+                display: 'flex',
+                marginTop: 20,
+                gap: 5,
+                alignSelf: 'center',
+              }}>
+              <Text style={{color: '#FFFFFF', fontSize: 15}}>
+                Total Distance covered = {totalDistance.toFixed(2)} m
               </Text>
-              <Text style={{color: '#FFFFFF', fontSize:15}}>
-                Maximum acceleration = {maxPositiveVelocity}
+              <Text style={{color: '#FFFFFF', fontSize: 15}}>
+                Maximum acceleration = {maxPositiveVelocity.toFixed(2)} m/s^2
               </Text>
-              <Text style={{color: '#FFFFFF', fontSize:15}}>
-                Maximum deceleration = {minPositiveVelocity}
+              <Text style={{color: '#FFFFFF', fontSize: 15}}>
+                Maximum deceleration = {minPositiveVelocity.toFixed(2)} m/s^2
               </Text>
-              </View>
             </View>
-          </ScrollView>
+          </View>
         </View>
       )}
     </View>

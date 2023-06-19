@@ -55,7 +55,7 @@ const DataVisualScreen = ({route}) => {
       try {
         const response = await axios
           .get(
-            'http://172.17.144.1:44301/api/trainingsession/' +
+            'http://145.93.104.250:44301/api/trainingsession/' +
               route.params.name,
           )
           .catch(error => {
@@ -69,7 +69,7 @@ const DataVisualScreen = ({route}) => {
             const percentageOfBodyweight =
               (obj.impactForce / 9.8 / parseInt(weight, 10)) * 100;
             return {
-              x: obj.frame,
+              x: obj.frame * (1 / 60),
               y: percentageOfBodyweight,
             };
           }),
@@ -88,7 +88,7 @@ const DataVisualScreen = ({route}) => {
       try {
         const response = await axios
           .get(
-            'http://192.168.2.18:44301/api/accelerationwithplayerload/all/' +
+            'http://145.93.104.250:44301/api/accelerationwithplayerload/all/' +
               route.params.name,
           )
           .catch(error => {
@@ -97,7 +97,7 @@ const DataVisualScreen = ({route}) => {
         setPlayerLoadData(
           response.data.map(obj => {
             return {
-              x: obj.id,
+              x: obj.id * (1 / 60),
               y: obj.playerLoad,
             };
           }),
@@ -242,6 +242,33 @@ const DataVisualScreen = ({route}) => {
                     //   />
                     // }
                   >
+                    <VictoryAxis
+                      style={{
+                        tickLabels: {
+                          fill: '#FFFFFF',
+                          fontSize: 16,
+                        },
+                        axisLabel: {
+                          fill: '#FFFFFF',
+                          fontSize: 20,
+                        },
+                      }}
+                      label="Time"
+                    />
+                    <VictoryAxis
+                      style={{
+                        tickLabels: {
+                          fill: '#FFFFFF',
+                          fontSize: 16,
+                        },
+                        axisLabel: {
+                          fill: '#FFFFFF',
+                          fontSize: 10,
+                        },
+                      }}
+                      label="% bodyweight"
+                      dependentAxis
+                    />
                     <VictoryBar
                       style={{data: {fill: '#93C123'}}}
                       data={data}
@@ -313,6 +340,33 @@ const DataVisualScreen = ({route}) => {
                     //   />
                     // }
                   >
+                    <VictoryAxis
+                      style={{
+                        tickLabels: {
+                          fill: '#FFFFFF',
+                          fontSize: 16,
+                        },
+                        axisLabel: {
+                          fill: '#FFFFFF',
+                          fontSize: 20,
+                        },
+                      }}
+                      label="Time"
+                    />
+                    <VictoryAxis
+                      style={{
+                        tickLabels: {
+                          fill: '#FFFFFF',
+                          fontSize: 16,
+                        },
+                        axisLabel: {
+                          fill: '#FFFFFF',
+                          fontSize: 10,
+                        },
+                      }}
+                      label="Player load"
+                      dependentAxis
+                    />
                     <VictoryBar
                       style={{data: {fill: '#93C123'}}}
                       data={playerLoadData}
