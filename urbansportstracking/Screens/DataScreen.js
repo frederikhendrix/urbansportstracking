@@ -30,7 +30,7 @@ const DataScreen = ({navigation}) => {
 
   useEffect(() => {
     axios
-      .get('http://145.93.104.66:44301/api/trainingsession/all')
+      .get('http://192.168.2.18:44301/api/trainingsession/')
       .then(response => {
         console.log(response);
         setTrainingSessions(response.data);
@@ -81,7 +81,7 @@ const DataScreen = ({navigation}) => {
         <Text
           style={{
             fontWeight: 'bold',
-            fontSize: 16,
+            fontSize: 20,
             color: '#F2F2F2',
             marginBottom: 20,
           }}>
@@ -102,9 +102,11 @@ const DataScreen = ({navigation}) => {
                 <Text
                   style={{
                     color: '#F2F2F2',
-                    fontSize: 16,
+                    fontSize: 18,
+                    marginTop: 5,
                     marginBottom: 15,
                   }}>
+                    <Text>Training session </Text>
                   {item.id}
                 </Text>
               </View>
@@ -121,7 +123,7 @@ const DataScreen = ({navigation}) => {
                     padding: 10,
                     paddingRight: 100,
                   }}>
-                  <Text style={{color: '#F2F2F2'}}>{item.startingTime}</Text>
+                  <Text style={{color: '#F2F2F2', fontSize: 16,}}>{item.startingTime}</Text>
                 </View>
                 <TouchableOpacity
                   onPress={() =>
@@ -130,7 +132,14 @@ const DataScreen = ({navigation}) => {
                       date: item.startingTime,
                     })
                   }>
-                  <IconAnt name="doubleright" size={24} color="#93C123" />
+                  <Text
+          style={{
+            fontWeight: 'bold',
+            fontSize: 16,
+            color: '#93C123',
+          }}>
+          Open file
+        </Text>
                 </TouchableOpacity>
               </View>
             </View>

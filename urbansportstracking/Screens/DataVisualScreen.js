@@ -13,6 +13,7 @@ import {
   VictoryAxis,
   VictoryTheme,
 } from 'victory-native';
+import Slider from '@react-native-community/slider';
 import {Data} from 'victory';
 const DataVisualScreen = ({route}) => {
   const routeDate = route.params.date;
@@ -25,6 +26,14 @@ const DataVisualScreen = ({route}) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingForPlayerLoad, setIsLoadingForPlayerLoad] = useState(true);
   const [weight, setWeight] = useState('120');
+  const [totalPlayerLoad, setTotalPlayerLoad] = useState(0);
+
+  const [threshHold, setThreshHold] = useState(0);
+  const [averagePlayerLoad, setAveragePlayerLoad] = useState(0);
+  const [totalImpactForceP, setTotalImpacForceP] = useState(0);
+  const [impactForce, setImpactForce] = useState([]);
+  const [totalImpactForceKG, setTotalImpactForceKG] = useState(0);
+  const [averageImpactForceKG, setAverageImpactForceKG] = useState(0);
   _retrieveData = async () => {
     try {
       const value = await AsyncStorage.getItem('@MyApp:dataWeight');
@@ -46,18 +55,19 @@ const DataVisualScreen = ({route}) => {
       try {
         const response = await axios
           .get(
-            'http://145.93.104.66:44301/api/trainingsession/' +
+            'http://172.17.144.1:44301/api/trainingsession/' +
               route.params.name,
           )
           .catch(error => {
             console.log(error + 'Training');
           });
         console.log('UseEffect for training data');
-        console.log(response.data);
+        console.log(response.data.impacts.length);
+        setImpactForce(response.data);
         setData(
           response.data.impacts.map(obj => {
             const percentageOfBodyweight =
-              (obj.impactForce / parseInt(weight, 10)) * 100;
+              (obj.impactForce / 9.8 / parseInt(weight, 10)) * 100;
             return {
               x: obj.frame,
               y: percentageOfBodyweight,
@@ -78,7 +88,7 @@ const DataVisualScreen = ({route}) => {
       try {
         const response = await axios
           .get(
-            'http://145.93.104.66:44301/api/accelerationwithplayerload/all/' +
+            'http://192.168.2.18:44301/api/accelerationwithplayerload/all/' +
               route.params.name,
           )
           .catch(error => {
@@ -92,6 +102,7 @@ const DataVisualScreen = ({route}) => {
             };
           }),
         );
+        setPlayerLoad(response.data);
         console.log('UseEffect for player load');
         // console.log(response.data);
         // GetPlayerLoadData();
@@ -104,6 +115,43 @@ const DataVisualScreen = ({route}) => {
     fetchData();
   }, [isLoading]);
 
+  useEffect(() => {
+    var count = 0;
+    for (let index = 0; index < playerLoad.length; index++) {
+      const element = playerLoad[index];
+      count = count + element.playerLoad;
+    }
+    setTotalPlayerLoad(Math.floor(count));
+    setAveragePlayerLoad(Math.floor(count / playerLoad.length));
+  }, [playerLoad]);
+
+  useEffect(() => {
+    var count = 0;
+    var amount = 0;
+    console.log('Useeffect impactforce average');
+    if (impactForce.length !== 0) {
+      for (let index = 0; index < impactForce.impacts.length; index++) {
+        const element = impactForce.impacts[index];
+        if (element.impactForce / 9.8 > threshHold) {
+          count = count + element.impactForce / 9.8;
+          amount++;
+        }
+      }
+      setAverageImpactForceKG(Math.floor(count / amount));
+    }
+  }, [threshHold]);
+  useEffect(() => {
+    var count = 0;
+    console.log('Useeffect impactforce');
+    if (impactForce.length !== 0) {
+      for (let index = 0; index < impactForce.impacts.length; index++) {
+        const element = impactForce.impacts[index];
+        count = count + element.impactForce / 9.8;
+      }
+      setTotalImpactForceKG(Math.floor(count / parseInt(weight)));
+      // setAverageImpactForceKG(Math.floor(count / impactForce.impacts.length));
+    }
+  }, [impactForce]);
   return (
     <View
       style={{flex: 1, backgroundColor: '#191D18', flexDirection: 'column'}}>
@@ -117,12 +165,53 @@ const DataVisualScreen = ({route}) => {
           <Text
             style={{
               color: '#FFFFFF',
-              fontSize: 25,
+              fontSize: 20,
               alignSelf: 'center',
               margin: 5,
+              marginTop: 10,
             }}>
             Impact Force
           </Text>
+          <Text
+            style={{
+              color: '#FFFFFF',
+              fontSize: 16,
+              alignSelf: 'center',
+              margin: 5,
+            }}>
+            Total impact force = {totalImpactForceKG} Times bodyweight
+          </Text>
+          <Text
+            style={{
+              color: '#93C123',
+              fontSize: 16,
+              alignSelf: 'center',
+              margin: 5,
+            }}>
+            Average impact force = {averageImpactForceKG} kg
+          </Text>
+          <Text
+            style={{
+              color: '#FFFFFF',
+              fontSize: 16,
+              alignSelf: 'center',
+              margin: 5,
+            }}>
+            {threshHold}
+          </Text>
+          <Slider
+            minimumValue={0}
+            maximumValue={100}
+            thumbTintColor="#8E23C1"
+            minimumTrackTintColor="#93C123"
+            maximumTrackTintColor="#93C123"
+            value={1}
+            onValueChange={value => setThreshHold(parseInt(value))}
+            style={{
+              width: 300,
+              marginBottom: 10,
+              alignSelf: 'center',
+            }}></Slider>
           {isLoading ? (
             <View
               style={{
@@ -154,7 +243,7 @@ const DataVisualScreen = ({route}) => {
                     // }
                   >
                     <VictoryBar
-                      style={{data: {fill: '#c43a31'}}}
+                      style={{data: {fill: '#93C123'}}}
                       data={data}
                       cornerRadius={{topLeft: 5, topRight: 5}}
                       barWidth={2}
@@ -170,11 +259,29 @@ const DataVisualScreen = ({route}) => {
           <Text
             style={{
               color: '#FFFFFF',
-              fontSize: 25,
+              fontSize: 22,
               alignSelf: 'center',
               margin: 5,
             }}>
             Player Load
+          </Text>
+          <Text
+            style={{
+              color: '#93C123',
+              fontSize: 16,
+              alignSelf: 'center',
+              margin: 5,
+            }}>
+            Total Player Load = {totalPlayerLoad}
+          </Text>
+          <Text
+            style={{
+              color: '#93C123',
+              fontSize: 16,
+              alignSelf: 'center',
+              margin: 5,
+            }}>
+            Average Player Load = {averagePlayerLoad}
           </Text>
           {isLoadingForPlayerLoad ? (
             <View
@@ -207,7 +314,7 @@ const DataVisualScreen = ({route}) => {
                     // }
                   >
                     <VictoryBar
-                      style={{data: {fill: '#c43a31'}}}
+                      style={{data: {fill: '#93C123'}}}
                       data={playerLoadData}
                       cornerRadius={{topLeft: 5, topRight: 5}}
                       barWidth={2}

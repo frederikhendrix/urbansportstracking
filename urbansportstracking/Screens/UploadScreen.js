@@ -9,25 +9,55 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import IconAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import IconFeather from 'react-native-vector-icons/Feather';
 import Slider from '@react-native-community/slider';
 import DocumentPicker from 'react-native-document-picker';
-
+import RNFS from 'react-native-fs';
+import axios from 'axios';
+import {AxiosRequestConfig} from 'axios';
 const UploadScreen = () => {
   const [painEndured, setPainEndured] = useState('1');
   const [effectiveness, setEffectiveness] = useState('1');
+  const [qualityOfSleep, setSleep] = useState('1');
   const [fileName, setFileName] = useState('File Name');
+  const [postForm, setPostForm] = useState();
+  const [postFormData, setPostFormData] = useState();
 
   const pickCSVFile = async () => {
     try {
       const res = await DocumentPicker.pick({
-        type: [DocumentPicker.types.allFiles],
+        type: [DocumentPicker.types.csv],
       });
 
-      if (res.type === 'application/vnd.ms-excel' || res.type === 'text/csv') {
+      if (
+        res.type === 'application/vnd.ms-excel' ||
+        res[0].type === 'text/csv'
+      ) {
         // Handle the selected CSV file here
-        console.log(res.uri);
+        const formData = new FormData();
+
+        formData.append('file', {
+          uri: res[0].uri,
+          name: res[0].name,
+          type: 'text/csv',
+          fileData: fileData,
+        });
+
+        // Add file to the FormData object
+        console.log(res[0].uri);
         setFileName(res[0].name);
+        const fileData = await RNFS.readFile(res[0].uri);
+        console.log('File data:');
+        console.log(fileData);
+        // formData.append('file', fileData);
+        var form = JSON.stringify({
+          UserId: 1,
+          Effect: effectiveness,
+          Pain: painEndured,
+        });
+        setPostForm(form);
+        setPostFormData(formData);
       } else {
         // Invalid file type selected
         console.log('Invalid file type. Please select a CSV file.');
@@ -45,6 +75,39 @@ const UploadScreen = () => {
     }
   };
 
+  const postFile = () => {
+    try {
+      if (postForm != null && postFormData != null) {
+        axios
+          .post(
+            'http://192.168.2.18:44301/api/File/postTrainging?' + postForm,
+            postFormData,
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+            },
+          )
+          .then(response => console.log(response.data))
+          .catch(error => {
+            if (error.response) {
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+            } else if (error.request) {
+              console.log(error.request);
+            } else {
+              console.log('Error', error.message);
+            }
+            console.log(error.config);
+            // Handle the error appropriately
+          });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const notifyMessage = () => {
     if (Platform.OS === 'android') {
       ToastAndroid.show('File Uploaded', ToastAndroid.SHORT);
@@ -57,6 +120,7 @@ const UploadScreen = () => {
     //here some axios post request to API
     console.log('csv file uploaded');
     notifyMessage();
+    postFile();
   };
 
   const uploadCSVFileAlerts = () => {
@@ -84,10 +148,10 @@ const UploadScreen = () => {
           height: '40%',
           alignItems: 'center',
           justifyContent: 'center',
-          marginTop: 40,
+          marginTop: 10,
         }}>
         <TouchableOpacity onPress={pickCSVFile}>
-          <IconFeather name="folder-plus" size={144} color="#93C123" />
+        <IconAwesome5 name="folder-plus" size={100} color="#93C123" />
         </TouchableOpacity>
         <Text
           style={{
@@ -102,20 +166,21 @@ const UploadScreen = () => {
       <View
         style={{
           width: '100%',
-          height: '35%',
+          height: '40%',
           alignItems: 'center',
         }}>
         <View
           style={{
             alignSelf: 'flex-start',
             margin: 10,
-            marginLeft: 40,
+            marginLeft: 45,
             marginBottom: 40,
+            marginTop: -3,
           }}>
           <Text
             style={{
               fontWeight: 'bold',
-              fontSize: 16,
+              fontSize: 20,
               color: '#F2F2F2',
               marginBottom: 20,
             }}>
@@ -129,23 +194,27 @@ const UploadScreen = () => {
             }}>
             Pain Endured
           </Text>
-          <Text
-            style={{
-              fontSize: 16,
-              color: '#F2F2F2',
-              marginBottom: 5,
-            }}>
-            {painEndured}
-          </Text>
-          <Slider
-            minimumValue={1}
-            maximumValue={10}
-            thumbTintColor="#8E23C1"
-            minimumTrackTintColor="#93C123"
-            maximumTrackTintColor="#93C123"
-            value={1}
-            onValueChange={value => setPainEndured(parseInt(value))}
-            style={{width: 300, marginBottom: 10}}></Slider>
+
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Text
+              style={{
+                fontSize: 16,
+                color: '#F2F2F2',
+                marginBottom: 10,
+              }}>
+              {painEndured}
+            </Text>
+            <Slider
+              minimumValue={1}
+              maximumValue={10}
+              thumbTintColor="#8E23C1"
+              minimumTrackTintColor="#93C123"
+              maximumTrackTintColor="#93C123"
+              value={1}
+              onValueChange={value => setPainEndured(parseInt(value))}
+              style={{width: 300, marginBottom: 10}}></Slider>
+          </View>
+
           <Text
             style={{
               fontSize: 16,
@@ -154,37 +223,64 @@ const UploadScreen = () => {
             }}>
             Effectiveness
           </Text>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Text
+              style={{
+                fontSize: 16,
+                color: '#F2F2F2',
+                marginBottom: 10,
+              }}>
+              {effectiveness}
+            </Text>
+            <Slider
+              minimumValue={1}
+              maximumValue={10}
+              thumbTintColor="#8E23C1"
+              minimumTrackTintColor="#93C123"
+              maximumTrackTintColor="#93C123"
+              value={1}
+              onValueChange={value => setEffectiveness(parseInt(value))}
+              style={{width: 300, marginBottom: 10}}></Slider>
+          </View>
           <Text
             style={{
               fontSize: 16,
               color: '#F2F2F2',
-              marginBottom: 5,
+              marginBottom: 10,
             }}>
-            {effectiveness}
+            Quality Of Sleep
           </Text>
-          <Slider
-            minimumValue={1}
-            maximumValue={10}
-            thumbTintColor="#8E23C1"
-            minimumTrackTintColor="#93C123"
-            maximumTrackTintColor="#93C123"
-            value={1}
-            onValueChange={value => setEffectiveness(parseInt(value))}
-            style={{width: 300, marginBottom: 10}}></Slider>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Text
+              style={{
+                fontSize: 16,
+                color: '#F2F2F2',
+                marginBottom: 10,
+              }}>
+              {qualityOfSleep}
+            </Text>
+            <Slider
+              minimumValue={1}
+              maximumValue={10}
+              thumbTintColor="#8E23C1"
+              minimumTrackTintColor="#93C123"
+              maximumTrackTintColor="#93C123"
+              value={1}
+              onValueChange={value => setSleep(parseInt(value))}
+              style={{width: 300, marginBottom: 10}}></Slider>
+          </View>
         </View>
       </View>
       <View
         style={{
           width: '100%',
-          height: '20%',
+          height: '10%',
           alignItems: 'center',
         }}>
         <View
           style={{
             alignSelf: 'center',
             margin: 10,
-            marginTop: 30,
-            marginBottom: 20,
           }}>
           <TouchableOpacity
             onPress={uploadCSVFileAlerts}
@@ -194,7 +290,7 @@ const UploadScreen = () => {
               backgroundColor: '#404040',
             }}>
             <Text style={{fontWeight: 'bold', fontSize: 16, color: '#F2F2F2'}}>
-              Upload
+              Submit Session
             </Text>
           </TouchableOpacity>
         </View>

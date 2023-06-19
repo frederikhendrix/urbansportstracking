@@ -64,10 +64,11 @@ const LoginScreen = ({navigation}) => {
       <Text
         style={{
           color: '#93C123',
-          fontSize: 16,
+          fontSize: 20,
           fontWeight: 'bold',
           marginLeft: 40,
           marginBottom: 10,
+          marginTop: 0
         }}>
         Email
       </Text>
@@ -75,7 +76,7 @@ const LoginScreen = ({navigation}) => {
         <TextInput
           style={styles.textInput}
           keyboardType="email-address"
-          placeholder="Email"
+          placeholder="johndoe@gmail.com"
           placeholderTextColor="#A8A8A8"
           value={email}
           onChangeText={text => handleEmailChange(text)}
@@ -84,10 +85,10 @@ const LoginScreen = ({navigation}) => {
       <Text
         style={{
           color: '#93C123',
-          fontSize: 16,
+          fontSize: 20,
           fontWeight: 700,
           marginLeft: 40,
-          marginTop: 30,
+          marginTop: 15,
           marginBottom: 10,
         }}>
         Password
@@ -95,7 +96,7 @@ const LoginScreen = ({navigation}) => {
       <View style={styles.container}>
         <TextInput
           style={styles.textInput}
-          placeholder="Password"
+          placeholder="******"
           placeholderTextColor="#A8A8A8"
           secureTextEntry={true}
           value={password}
@@ -106,18 +107,19 @@ const LoginScreen = ({navigation}) => {
       <TouchableOpacity
         onPress={loginButton}
         style={{
-          width: '50%',
+          width: '60%',
           alignSelf: 'center',
           backgroundColor: '#93C123',
           padding: 10,
           borderRadius: 10,
-          marginBottom: 0,
-          margin: 20,
+          marginBottom: -5,
+          margin: 50,
         }}>
         <Text
           style={{
             color: '#F2F2F2',
             fontSize: 16,
+            fontWeight: 'bold',
             textAlign: 'center',
           }}>
           Log in
@@ -126,7 +128,7 @@ const LoginScreen = ({navigation}) => {
       <TouchableOpacity
         onPress={() => {}}
         style={{
-          width: '50%',
+          width: '60%',
           alignSelf: 'center',
           backgroundColor: '#191D18',
           borderColor: '#93C123',
@@ -140,6 +142,7 @@ const LoginScreen = ({navigation}) => {
           style={{
             color: '#F2F2F2',
             fontSize: 16,
+            fontWeight: 'bold',
             textAlign: 'center',
           }}>
           Sign up
@@ -148,6 +151,7 @@ const LoginScreen = ({navigation}) => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
@@ -156,11 +160,10 @@ const styles = StyleSheet.create({
   textInput: {
     width: '80%',
     height: 40,
-    borderWidth: 1,
-    borderColor: '#999999',
     borderRadius: 5,
     paddingLeft: 10,
     color: '#F2F2F2', // Text color when typing
+    backgroundColor: '#404040'
   },
 });
 export default LoginScreen;

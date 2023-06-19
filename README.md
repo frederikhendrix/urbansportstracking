@@ -45,3 +45,5 @@ There are different folders. components, images, Screens, and within the compone
 
 Most of these speak for themselves. In the App.js you only have the StackScreen components this is located in the /components/main/index.js
 You need to understand that in that folder the entire navigation structure is located. All different stacks for screens and the bottom navigation.
+
+The API url's used in the axios files should be changed to the correct IP-adress of the server laptop, or wherever it is hosted on.

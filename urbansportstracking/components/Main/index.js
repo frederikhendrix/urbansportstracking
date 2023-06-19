@@ -25,14 +25,17 @@ function DataStack() {
       initialRouteName="DataStack"
       screenOptions={{headerShown: false, headerTitleAlign: 'center'}}>
       <Stack.Screen
-        name="Data"
+        name="Statistics"
         component={DataScreen}
         options={{
-          title: 'Data',
+          title: 'Statistics',
           headerShown: true,
           headerTintColor: '#93C123',
           headerStyle: {
-            backgroundColor: '#404040',
+            backgroundColor: '#191D18',
+          },
+          headerTitleStyle: {
+            fontSize: 27,
           },
         }}
       />
@@ -40,11 +43,14 @@ function DataStack() {
         name="DataVisualScreen"
         component={DataVisualScreen}
         options={{
-          title: 'Data Visual',
+          title: 'Training Session',
           headerShown: true,
           headerTintColor: '#93C123',
           headerStyle: {
-            backgroundColor: '#404040',
+            backgroundColor: '#191D18',
+          },
+          headerTitleStyle: {
+            fontSize: 27,
           },
         }}
       />
@@ -60,14 +66,6 @@ function LoginStack() {
       <Stack.Screen
         name="Login"
         component={LoginScreen}
-        options={{
-          title: 'Login',
-          headerShown: true,
-          headerTintColor: '#93C123',
-          headerStyle: {
-            backgroundColor: '#404040',
-          },
-        }}
       />
       <Stack.Screen
         name="ProfileScreen"
@@ -77,7 +75,10 @@ function LoginStack() {
           headerShown: true,
           headerTintColor: '#93C123',
           headerStyle: {
-            backgroundColor: '#404040',
+            backgroundColor: '#191D18',
+          },
+          headerTitleStyle: {
+            fontSize: 27,
           },
         }}
       />
@@ -88,23 +89,28 @@ function LoginStack() {
 function StackScreens() {
   return (
     <Tab.Navigator
-      initialRouteName="Feed"
-      screenOptions={({route}) => ({
-        tabBarInactiveTintColor: '#93C123',
-        tabBarActiveTintColor: '#191D18',
-        tabBarStyle: '#000000',
-        headerTitleAlign: 'center',
-        tabBarStyle: {backgroundColor: '#404040'},
-        headerStyle: {backgroundColor: '#404040'},
-        headerTitleStyle: {color: '#93C123'},
-      })}>
+    initialRouteName="Feed"
+    screenOptions={({route}) => ({
+      tabBarInactiveTintColor: '#93C123',
+      tabBarActiveTintColor: '#F2F2F2',
+      headerTitleAlign: 'center',
+      tabBarStyle: {backgroundColor: '#404040'},
+      headerStyle: {
+        backgroundColor: '#191D18',
+        shadowColor: '#000000',
+      },
+      headerTitleStyle: {
+        fontSize: 27,
+        color: '#93C123',
+      },
+    })}>
       <Tab.Screen
-        name="Home"
+        name="Summary"
         component={HomeScreen}
         options={{
-          tabBarLabel: 'Home',
+          tabBarLabel: 'Summary',
           tabBarIcon: ({color, size}) => (
-            <IconAwesome name="home" size={size} color={color} />
+            <IconAwesome name="list" size={size} color={color} />
           ),
           unmountOnBlur: true,
         }}
@@ -115,18 +121,18 @@ function StackScreens() {
         options={{
           tabBarLabel: 'Upload',
           tabBarIcon: ({color, size}) => (
-            <IconFeather name="folder-plus" size={size} color={color} />
+            <IconAwesome5 name="folder-plus" size={size} color={color} />
           ),
           unmountOnBlur: true,
         }}
       />
       <Tab.Screen
-        name="Data"
+        name="Statistics"
         component={DataStack}
         options={{
           headerShown: false,
           headerTitleAlign: 'center',
-          tabBarLabel: 'Data',
+          tabBarLabel: 'Statistics',
           tabBarIcon: ({color, size}) => (
             <IconAntDesign name="linechart" size={size} color={color} />
           ),
@@ -151,7 +157,7 @@ function StackScreens() {
           headerShown: false,
           tabBarLabel: 'Profile',
           tabBarIcon: ({color, size}) => (
-            <IconAntDesign name="user" size={size} color={color} />
+            <IconAwesome name="user" size={size} color={color} />
           ),
           unmountOnBlur: true,
         }}

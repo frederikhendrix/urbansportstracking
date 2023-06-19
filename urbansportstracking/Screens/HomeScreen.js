@@ -14,7 +14,7 @@ const HomeScreen = () => {
       style={{flex: 1, alignItems: 'center', backgroundColor: '#191D18'}}>
       <View
         style={{
-          width: '100%',
+          width: '110%',
           height: '40%',
           marginTop: 20,
         }}>
@@ -32,9 +32,9 @@ const HomeScreen = () => {
               alignSelf: 'flex-start',
               margin: 10,
               marginLeft: 40,
-              marginBottom: 40,
+              marginBottom: 15,
             }}>
-            <Text style={{fontWeight: 'bold', fontSize: 16, color: '#F2F2F2'}}>
+            <Text style={{fontWeight: 'bold', fontSize: 22, color: '#F2F2F2'}}>
               Recent Statistics
             </Text>
           </View>
@@ -43,7 +43,7 @@ const HomeScreen = () => {
               backgroundColor: '#404040',
               width: '80%',
               height: '15%',
-              marginBottom: 25,
+              marginBottom: 15,
               flexDirection: 'row',
               borderRadius: 9,
               justifyContent: 'space-between',
@@ -53,7 +53,7 @@ const HomeScreen = () => {
               style={{
                 marginLeft: 20,
                 fontWeight: 'bold',
-                fontSize: 16,
+                fontSize: 15,
                 color: '#F2F2F2',
               }}>
               Average Impact
@@ -61,8 +61,7 @@ const HomeScreen = () => {
             <Text
               style={{
                 marginRight: 20,
-                fontWeight: 'bold',
-                fontSize: 16,
+                fontSize: 14,
                 color: '#93C123',
               }}>
               Measurements
@@ -73,7 +72,7 @@ const HomeScreen = () => {
               backgroundColor: '#404040',
               width: '80%',
               height: '15%',
-              marginBottom: 25,
+              marginBottom: 15,
               flexDirection: 'row',
               borderRadius: 9,
               justifyContent: 'space-between',
@@ -83,7 +82,7 @@ const HomeScreen = () => {
               style={{
                 marginLeft: 20,
                 fontWeight: 'bold',
-                fontSize: 16,
+                fontSize: 15,
                 color: '#F2F2F2',
               }}>
               Recent Impact
@@ -91,8 +90,7 @@ const HomeScreen = () => {
             <Text
               style={{
                 marginRight: 20,
-                fontWeight: 'bold',
-                fontSize: 16,
+                fontSize: 14,
                 color: '#93C123',
               }}>
               Measurements
@@ -105,7 +103,7 @@ const HomeScreen = () => {
               height: '15%',
               marginBottom: 25,
               flexDirection: 'row',
-              borderRadius: 9,
+              borderRadius: 10,
               justifyContent: 'space-between',
               alignItems: 'center',
             }}>
@@ -113,7 +111,7 @@ const HomeScreen = () => {
               style={{
                 marginLeft: 20,
                 fontWeight: 'bold',
-                fontSize: 16,
+                fontSize: 15,
                 color: '#F2F2F2',
               }}>
               Recent CMJ
@@ -121,8 +119,7 @@ const HomeScreen = () => {
             <Text
               style={{
                 marginRight: 20,
-                fontWeight: 'bold',
-                fontSize: 16,
+                fontSize: 14,
                 color: '#93C123',
               }}>
               Measurements
