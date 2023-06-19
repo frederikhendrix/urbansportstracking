@@ -112,7 +112,7 @@ const UploadScreen = () => {
     if (Platform.OS === 'android') {
       ToastAndroid.show('File Uploaded', ToastAndroid.SHORT);
     } else {
-      AlertIOS.alert('File Uploaded');
+      Alert.alert('File Uploaded');
     }
   };
 
@@ -145,7 +145,7 @@ const UploadScreen = () => {
       <View
         style={{
           width: '100%',
-          height: '40%',
+          height: '30%',
           alignItems: 'center',
           justifyContent: 'center',
           marginTop: 10,
@@ -274,18 +274,13 @@ const UploadScreen = () => {
       <View
         style={{
           width: '100%',
-          height: '10%',
+          height: '20%',
           alignItems: 'center',
         }}>
-        <View
-          style={{
-            alignSelf: 'center',
-            margin: 10,
-          }}>
           <TouchableOpacity
             onPress={uploadCSVFileAlerts}
             style={{
-              padding: 10,
+              padding: 15,
               borderRadius: 10,
               backgroundColor: '#404040',
             }}>
@@ -293,7 +288,6 @@ const UploadScreen = () => {
               Submit Session
             </Text>
           </TouchableOpacity>
-        </View>
       </View>
     </SafeAreaView>
   );

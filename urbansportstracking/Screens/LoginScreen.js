@@ -112,8 +112,9 @@ const LoginScreen = ({navigation}) => {
           backgroundColor: '#93C123',
           padding: 10,
           borderRadius: 10,
-          marginBottom: -5,
-          margin: 50,
+          marginTop: '5%',
+          alignItems: 'center',
+          marginBottom: '3%',
         }}>
         <Text
           style={{
@@ -135,8 +136,6 @@ const LoginScreen = ({navigation}) => {
           padding: 10,
           borderWidth: 2,
           borderRadius: 10,
-          marginBottom: 20,
-          margin: 20,
         }}>
         <Text
           style={{
