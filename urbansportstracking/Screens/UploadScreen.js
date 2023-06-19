@@ -80,7 +80,7 @@ const UploadScreen = () => {
       if (postForm != null && postFormData != null) {
         axios
           .post(
-            'http://192.168.2.18:44301/api/File/postTrainging?' + postForm,
+            'http://145.93.104.250:44301/api/File/postTrainging?' + postForm,
             postFormData,
             {
               headers: {
@@ -166,7 +166,7 @@ const UploadScreen = () => {
       <View
         style={{
           width: '100%',
-          height: '40%',
+          height: '50%',
           alignItems: 'center',
         }}>
         <View
@@ -240,7 +240,7 @@ const UploadScreen = () => {
               maximumTrackTintColor="#93C123"
               value={1}
               onValueChange={value => setEffectiveness(parseInt(value))}
-              style={{width: 300, marginBottom: 10}}></Slider>
+              style={{width: 300, marginBottom: 10, height: 150}}></Slider>
           </View>
           <Text
             style={{
@@ -267,7 +267,7 @@ const UploadScreen = () => {
               maximumTrackTintColor="#93C123"
               value={1}
               onValueChange={value => setSleep(parseInt(value))}
-              style={{width: 300, marginBottom: 10}}></Slider>
+              style={{width: 300, marginBottom: 10, height: 150}}></Slider>
           </View>
         </View>
       </View>
