@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import IconAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import IconFeather from 'react-native-vector-icons/Feather';
 import Slider from '@react-native-community/slider';
 import DocumentPicker from 'react-native-document-picker';
@@ -147,10 +148,10 @@ const UploadScreen = () => {
           height: '40%',
           alignItems: 'center',
           justifyContent: 'center',
-          marginTop: 40,
+          marginTop: 10,
         }}>
         <TouchableOpacity onPress={pickCSVFile}>
-          <IconFeather name="folder-plus" size={144} color="#93C123" />
+        <IconAwesome5 name="folder-plus" size={100} color="#93C123" />
         </TouchableOpacity>
         <Text
           style={{
@@ -172,13 +173,14 @@ const UploadScreen = () => {
           style={{
             alignSelf: 'flex-start',
             margin: 10,
-            marginLeft: 40,
+            marginLeft: 45,
             marginBottom: 40,
+            marginTop: -3,
           }}>
           <Text
             style={{
               fontWeight: 'bold',
-              fontSize: 16,
+              fontSize: 20,
               color: '#F2F2F2',
               marginBottom: 20,
             }}>

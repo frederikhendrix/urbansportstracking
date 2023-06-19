@@ -54,7 +54,7 @@ const CMJScreen = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          'http://192.168.2.18:44301/api/countermovementjump/all',
+          'http://192.168.2.18:44301/api/trainingsession/all',
         );
         const timestamp = 1 / 60;
         setData(
@@ -79,7 +79,7 @@ const CMJScreen = () => {
       style={{flex: 1, backgroundColor: '#191D18', flexDirection: 'column'}}>
       <Text
         style={{
-          fontSize: 16, // TODO: Add date
+          fontSize: 16, 
           color: '#F2F2F2',
           fontWeight: 600,
           fontSize: 20,
@@ -119,16 +119,19 @@ const CMJScreen = () => {
                   width={data.length}
                 />
               </VictoryChart>
-
-              <Text style={{color: '#FFFFFF'}}>
+                
+                <Text style={{color: '#93C123', marginLeft:75, marginTop: 10, fontSize: 23, fontWeight: 500}}> Statistics - Fatiguness</Text>
+                  <View style={{display:"flex", marginLeft:110, marginTop: 20, gap:5}}>
+              <Text style={{color: '#FFFFFF', fontSize:15}}>
                 Total Distance covered = {totalDistance}
               </Text>
-              <Text style={{color: '#FFFFFF'}}>
+              <Text style={{color: '#FFFFFF', fontSize:15}}>
                 Maximum acceleration = {maxPositiveVelocity}
               </Text>
-              <Text style={{color: '#FFFFFF'}}>
+              <Text style={{color: '#FFFFFF', fontSize:15}}>
                 Maximum deceleration = {minPositiveVelocity}
               </Text>
+              </View>
             </View>
           </ScrollView>
         </View>

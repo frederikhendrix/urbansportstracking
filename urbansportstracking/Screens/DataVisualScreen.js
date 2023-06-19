@@ -55,7 +55,7 @@ const DataVisualScreen = ({route}) => {
       try {
         const response = await axios
           .get(
-            'http://192.168.2.18:44301/api/trainingsession/' +
+            'http://172.17.144.1:44301/api/trainingsession/' +
               route.params.name,
           )
           .catch(error => {
@@ -165,9 +165,10 @@ const DataVisualScreen = ({route}) => {
           <Text
             style={{
               color: '#FFFFFF',
-              fontSize: 25,
+              fontSize: 20,
               alignSelf: 'center',
               margin: 5,
+              marginTop: 10,
             }}>
             Impact Force
           </Text>
@@ -182,8 +183,8 @@ const DataVisualScreen = ({route}) => {
           </Text>
           <Text
             style={{
-              color: '#FFFFFF',
-              fontSize: 25,
+              color: '#93C123',
+              fontSize: 16,
               alignSelf: 'center',
               margin: 5,
             }}>
@@ -242,7 +243,7 @@ const DataVisualScreen = ({route}) => {
                     // }
                   >
                     <VictoryBar
-                      style={{data: {fill: '#c43a31'}}}
+                      style={{data: {fill: '#93C123'}}}
                       data={data}
                       cornerRadius={{topLeft: 5, topRight: 5}}
                       barWidth={2}
@@ -258,7 +259,7 @@ const DataVisualScreen = ({route}) => {
           <Text
             style={{
               color: '#FFFFFF',
-              fontSize: 25,
+              fontSize: 22,
               alignSelf: 'center',
               margin: 5,
             }}>
@@ -266,7 +267,7 @@ const DataVisualScreen = ({route}) => {
           </Text>
           <Text
             style={{
-              color: '#FFFFFF',
+              color: '#93C123',
               fontSize: 16,
               alignSelf: 'center',
               margin: 5,
@@ -275,7 +276,7 @@ const DataVisualScreen = ({route}) => {
           </Text>
           <Text
             style={{
-              color: '#FFFFFF',
+              color: '#93C123',
               fontSize: 16,
               alignSelf: 'center',
               margin: 5,
@@ -313,7 +314,7 @@ const DataVisualScreen = ({route}) => {
                     // }
                   >
                     <VictoryBar
-                      style={{data: {fill: '#c43a31'}}}
+                      style={{data: {fill: '#93C123'}}}
                       data={playerLoadData}
                       cornerRadius={{topLeft: 5, topRight: 5}}
                       barWidth={2}
