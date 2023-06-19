@@ -106,7 +106,7 @@ const DataScreen = ({navigation}) => {
                     marginTop: 5,
                     marginBottom: 15,
                   }}>
-                    <Text>Training session </Text>
+                  <Text>Training session </Text>
                   {item.id}
                 </Text>
               </View>
@@ -123,7 +123,9 @@ const DataScreen = ({navigation}) => {
                     padding: 10,
                     paddingRight: 100,
                   }}>
-                  <Text style={{color: '#F2F2F2', fontSize: 16,}}>{item.startingTime}</Text>
+                  <Text style={{color: '#F2F2F2', fontSize: 16}}>
+                    {item.startingTime}
+                  </Text>
                 </View>
                 <TouchableOpacity
                   onPress={() =>
@@ -133,13 +135,13 @@ const DataScreen = ({navigation}) => {
                     })
                   }>
                   <Text
-          style={{
-            fontWeight: 'bold',
-            fontSize: 16,
-            color: '#93C123',
-          }}>
-          Open file
-        </Text>
+                    style={{
+                      fontWeight: 'bold',
+                      fontSize: 16,
+                      color: '#93C123',
+                    }}>
+                    Open file
+                  </Text>
                 </TouchableOpacity>
               </View>
             </View>

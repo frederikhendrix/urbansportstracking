@@ -69,7 +69,7 @@ const DataVisualScreen = ({route}) => {
             const percentageOfBodyweight =
               (obj.impactForce / 9.8 / parseInt(weight, 10)) * 100;
             return {
-              x: obj.frame,
+              x: obj.frame * (1 / 60),
               y: percentageOfBodyweight,
             };
           }),
@@ -97,7 +97,7 @@ const DataVisualScreen = ({route}) => {
         setPlayerLoadData(
           response.data.map(obj => {
             return {
-              x: obj.id,
+              x: obj.id * (1 / 60),
               y: obj.playerLoad,
             };
           }),
@@ -242,6 +242,33 @@ const DataVisualScreen = ({route}) => {
                     //   />
                     // }
                   >
+                    <VictoryAxis
+                      style={{
+                        tickLabels: {
+                          fill: '#FFFFFF',
+                          fontSize: 16,
+                        },
+                        axisLabel: {
+                          fill: '#FFFFFF',
+                          fontSize: 20,
+                        },
+                      }}
+                      label="Time"
+                    />
+                    <VictoryAxis
+                      style={{
+                        tickLabels: {
+                          fill: '#FFFFFF',
+                          fontSize: 16,
+                        },
+                        axisLabel: {
+                          fill: '#FFFFFF',
+                          fontSize: 10,
+                        },
+                      }}
+                      label="% bodyweight"
+                      dependentAxis
+                    />
                     <VictoryBar
                       style={{data: {fill: '#93C123'}}}
                       data={data}
@@ -313,6 +340,33 @@ const DataVisualScreen = ({route}) => {
                     //   />
                     // }
                   >
+                    <VictoryAxis
+                      style={{
+                        tickLabels: {
+                          fill: '#FFFFFF',
+                          fontSize: 16,
+                        },
+                        axisLabel: {
+                          fill: '#FFFFFF',
+                          fontSize: 20,
+                        },
+                      }}
+                      label="Time"
+                    />
+                    <VictoryAxis
+                      style={{
+                        tickLabels: {
+                          fill: '#FFFFFF',
+                          fontSize: 16,
+                        },
+                        axisLabel: {
+                          fill: '#FFFFFF',
+                          fontSize: 10,
+                        },
+                      }}
+                      label="Player load"
+                      dependentAxis
+                    />
                     <VictoryBar
                       style={{data: {fill: '#93C123'}}}
                       data={playerLoadData}
