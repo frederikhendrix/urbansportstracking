@@ -38,6 +38,10 @@ You can only run-ios with a macbook and xCode. (Refer to documentation about env
 
 Good job!! You ran the React Native project.
 
+### access the data from the Back-End
+
+In order to access the data in the app make sure you are running the back-end in a docker container. After you run this container find the public IP adress of your laptop/pc and change all the ip adresses in the Datascreen, DataVisualScreen, CMJScreen and the uploadscreen to your own.
+
 ### information about the folders and structures
 
 This is going to be some information about the project.

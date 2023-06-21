@@ -80,7 +80,7 @@ const UploadScreen = () => {
       if (postForm != null && postFormData != null) {
         axios
           .post(
-            'http://145.93.104.250:44301/api/File/postTrainging?' + postForm,
+            'http://145.93.104.78:44301/api/File/postTrainging?' + postForm,
             postFormData,
             {
               headers: {
